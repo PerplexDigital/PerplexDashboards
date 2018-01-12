@@ -1,0 +1,59 @@
+{
+  "propertyEditors": [
+    {
+      "alias": "Perplex.UserDashboard",
+      "name": "Perplex - User Dashboard",
+      "editor": {
+        "hideLabel": true,
+        "valueType": "JSON",
+        "view": "~/App_Plugins/PerplexDashboards/html/user-dashboard.html"
+      }
+    },
+    {
+      "alias": "PerplexDashboards.MemberDashboard.LockedMembersListView",
+      "name": "PerplexDashboards - Locked Members ListView",
+      "editor": {
+        "view": "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/LockedMembersListView/LockedMembersListView.html",
+        "hideLabel": true,
+        "valueType": "JSON"
+      }
+    },
+    {
+      "alias": "PerplexDashboards.MemberDashboard.UnapprovedMembersListView",
+      "name": "PerplexDashboards - Unapproved Members ListView",
+      "editor": {
+        "view": "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/UnapprovedMembersListView/UnapprovedMembersListView.html",
+        "hideLabel": true,
+        "valueType": "JSON"
+      }
+    },
+    {
+      "alias": "PerplexDashboards.MemberDashboard.MembersLogListView",
+      "name": "PerplexDashboards - Members Log ListView",
+      "editor": {
+        "view": "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/MembersLogListView/MembersLogListView.html",
+        "hideLabel": true,
+        "valueType": "JSON"
+      }
+    }
+  ],
+
+  "javascript": [
+    "~/App_Plugins/PerplexDashboards/js/directives/perplex.render-property.directive.js",
+    "~/App_Plugins/PerplexDashboards/js/services/perplex.render-property.service.js",
+    "~/App_Plugins/PerplexDashboards/js/directives/perplex.paged-listview.directive.js",
+
+    "~/App_Plugins/PerplexDashboards/UserDashboard/js/controllers/perplex.user-dashboard.controller.js",
+    "~/App_Plugins/PerplexDashboards/UserDashboard/js/services/perplex.user-dashboard.api.service.js",
+    
+    "~/App_Plugins/PerplexDashboards/MemberDashboard/js/services/perplex.member-dashboard.api.service.js",
+    "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/LockedMembersListView/LockedMembersListView.controller.js",
+    "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/UnapprovedMembersListView/UnapprovedMembersListView.controller.js",
+    "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/MembersLogListView/MembersLogListView.controller.js"
+  ],
+
+  "css": [
+    "~/App_Plugins/PerplexDashboards/css/perplex.user-dashboard.css",
+    "~/App_Plugins/PerplexDashboards/css/perplex.paged-listview.css"
+  ]
+}

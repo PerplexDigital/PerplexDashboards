@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "App_Plugins/PerplexDashboards/css/userdashboard.css",
+    "inputFile": "App_Plugins/PerplexDashboards/css/userdashboard.less"
+  },
+  {
+    "outputFile": "App_Plugins/PerplexDashboards/css/perplex.paged-listview.css",
+    "inputFile": "App_Plugins/PerplexDashboards/css/perplex.paged-listview.less"
+  },
+  {
+    "outputFile": "App_Plugins/PerplexDashboards/css/perplex.user-dashboard.css",
+    "inputFile": "App_Plugins/PerplexDashboards/css/perplex.user-dashboard.less"
+  }
+]

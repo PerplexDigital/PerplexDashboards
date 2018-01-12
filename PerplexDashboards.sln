@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerplexDashboards.Web", "PerplexDashboards.Web\PerplexDashboards.Web.csproj", "{843ADD18-9284-4BE9-BD65-376E63D253D3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3DE34B45-6E60-4370-8926-B0206F5DA573} = {3DE34B45-6E60-4370-8926-B0206F5DA573}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerplexDashboards", "PerplexDashboards\PerplexDashboards.csproj", "{3DE34B45-6E60-4370-8926-B0206F5DA573}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{843ADD18-9284-4BE9-BD65-376E63D253D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843ADD18-9284-4BE9-BD65-376E63D253D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843ADD18-9284-4BE9-BD65-376E63D253D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843ADD18-9284-4BE9-BD65-376E63D253D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE34B45-6E60-4370-8926-B0206F5DA573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE34B45-6E60-4370-8926-B0206F5DA573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE34B45-6E60-4370-8926-B0206F5DA573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE34B45-6E60-4370-8926-B0206F5DA573}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F7526B2-24EA-4D99-BCA0-6AD8BF3CFC6F}
+	EndGlobalSection
+EndGlobal

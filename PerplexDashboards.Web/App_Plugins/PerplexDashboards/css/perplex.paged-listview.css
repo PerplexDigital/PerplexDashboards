@@ -1,0 +1,88 @@
+﻿.perplex-paged-listview .c-table__item {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid lightgray;
+  margin: 1.5rem 0;
+}
+.perplex-paged-listview .c-table__item tbody:nth-child(2n+1) > tr.c-table__row {
+  background-color: #f8f8f8;
+}
+.perplex-paged-listview .c-table__item tbody:nth-child(n) > tr.c-table__row.c-table__row--selectable:hover {
+  background: rgba(46, 138, 234, 0.15);
+  cursor: pointer;
+}
+.perplex-paged-listview .c-table__row {
+  text-align: left;
+}
+.perplex-paged-listview .c-table__row--head {
+  background: #F8F8F8;
+  border-bottom: 1px solid #d9d9d9;
+}
+.perplex-paged-listview .c-table__row--inline {
+  border-bottom: 1px solid #d9d9d9;
+}
+.perplex-paged-listview .c-table__cell {
+  padding: .625rem 1.5rem;
+  vertical-align: top;
+}
+.perplex-paged-listview .c-table__cell:first-of-type {
+  padding-left: 2rem;
+}
+.perplex-paged-listview .c-table__cell:last-of-type {
+  padding-right: 2rem;
+}
+.perplex-paged-listview .c-table__cell--inline {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.perplex-paged-listview .c-table__link {
+  text-decoration: underline;
+  color: #2e8aea;
+}
+.perplex-paged-listview .c-table__footer {
+  text-align: center;
+}
+.perplex-paged-listview .c-table__row--selected {
+  background: rgba(46, 138, 234, 0.15) !important;
+  border-bottom: 0 !important;
+}
+.perplex-paged-listview .c-table__title {
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 700;
+  display: inline-block;
+  margin: 1rem 2rem 1rem 0;
+  position: relative;
+  top: .3rem;
+}
+.perplex-paged-listview .c-pag__list {
+  display: block;
+  letter-spacing: -0.31em;
+  list-style: none;
+  font-size: 13px;
+  margin: 0;
+}
+.perplex-paged-listview .c-pag__list .spacer {
+  padding: 0 .8rem 0 .4rem;
+}
+.perplex-paged-listview .c-pag__item {
+  display: inline-block;
+  letter-spacing: 0;
+}
+.perplex-paged-listview .c-pag__link {
+  background: #F8F8F8;
+  border: 1px solid #d9d9d9;
+  padding: .4rem .8rem;
+  margin: 0 .6rem 0 0;
+  transition: 0.4s ease-in-out all;
+}
+.perplex-paged-listview .c-pag__link:hover {
+  background: #1d1d1d;
+  color: #FFF;
+}
+.perplex-paged-listview .c-pag__link--active,
+.perplex-paged-listview .c-pag__link--active:hover {
+  color: #FFF;
+  background: #625a74;
+}

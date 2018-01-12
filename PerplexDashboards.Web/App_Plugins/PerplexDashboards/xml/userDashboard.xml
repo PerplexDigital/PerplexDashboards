@@ -1,0 +1,8 @@
+﻿<section alias="PerplexDashboards_UserDashboard">
+  <areas>
+    <area>users</area>
+  </areas>
+  <tab caption="User Dashboard">
+    <control showOnce="true" addPanel="true" panelCaption="">/App_Plugins/PerplexDashboards/UserDashboard/html/perplex.user-dashboard.html</control>
+  </tab>
+</section>

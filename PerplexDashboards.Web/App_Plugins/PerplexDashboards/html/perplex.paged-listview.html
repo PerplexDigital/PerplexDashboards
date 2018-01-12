@@ -1,0 +1,46 @@
+<div class="perplex-paged-listview">    
+    <div class="commands" ng-if="commands.length > 0 && selected.length > 0">
+        <button type="button"
+            class="btn btn-info"
+            ng-repeat="command in commands" 
+            ng-bind="command.name"
+            ng-click="runCommand(command)"></button>        
+    </div>
+
+    <table class="c-table__item">
+        <thead>
+            <tr class="c-table__row c-table__row--head">
+                <th class="c-table__cell c-table_-cell--head" ng-repeat="column in columns" ng-bind="column.name"></th>
+            </tr>
+        </thead>
+    
+        <tbody ng-repeat="item in items">
+            <tr class="c-table__row" 
+                ng-click="selectItem(item)" 
+                ng-class="{ 'c-table__row--selected' : isSelected(item), 'c-table__row--selectable': commands.length > 0}">
+                <td class="c-table__cell" ng-repeat="column in columns">
+                    <a ng-if="column.onClick" href="" prevent-default ng-click="column.onClick(item)" ng-bind="item[column.property]"></a>
+                    <span ng-if="!column.onClick" ng-bind="item[column.property]"></span>
+                </td>                
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="c-pag__list" ng-if="paging.TotalPages > 1">
+        <li class="c-pag__item" ng-if="paging.Page > 1">
+            <button type="button" ng-click="gotoPage(paging.Page - 1)" class="c-pag__link"><localize key="general_previous">prev</localize></button>
+        </li>
+
+        <li ng-repeat="page in paging.Pagination track by $index" class="c-pag__item">
+            <span ng-if="$index > 0 && paging.Pagination[$index - 1] !== page - 1" class="spacer">...</span>
+            <button type="button" class="c-pag__link"
+                    ng-class="{ 'c-pag__link--active': page === paging.Page }" 
+                    ng-click="gotoPage(page)"
+                    ng-bind="page"></button>
+        </li>
+
+        <li class="c-pag__item" ng-if="paging.Page !== paging.TotalPages">
+            <button type="button" ng-click="gotoPage(paging.Page + 1)" class="c-pag__link"><localize key="general_next">next</localize></button>
+        </li>
+    </ul>
+</div>

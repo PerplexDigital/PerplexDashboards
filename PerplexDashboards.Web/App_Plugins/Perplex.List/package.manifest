@@ -1,0 +1,17 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/Perplex.List/js/perplex.list.controller.js"
+  ],
+
+  "propertyEditors": [
+    {
+      "alias": "Perplex.List",
+      "name": "Perplex - List",
+      "editor": {
+        "view": "~/App_Plugins/Perplex.List/html/perplex.list.html",
+        "hideLabel": false,
+        "valueType": "TEXT"
+      }
+    }
+  ]
+}

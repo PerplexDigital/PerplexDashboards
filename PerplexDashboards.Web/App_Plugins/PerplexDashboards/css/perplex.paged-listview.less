@@ -1,0 +1,115 @@
+.perplex-paged-listview {
+    .c-table {
+        &__item {
+            width: 100%;
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 14px;
+            border: 1px solid lightgray;
+            margin: 1.5rem 0;
+
+            tbody {
+                &:nth-child(2n+1) > tr.c-table__row {
+                    background-color: #f8f8f8;
+                }
+
+                &:nth-child(n) > tr.c-table__row.c-table__row--selectable:hover {
+                    background: fade(#2e8aea, 15%);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &__row {
+            text-align: left;
+        }
+
+        &__row--head {
+            background: #F8F8F8;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        &__row--inline {
+            border-bottom: 1px solid #d9d9d9;
+        }
+    
+        &__cell {
+            padding: .625rem 1.5rem;
+            vertical-align: top;
+        }
+
+        &__cell:first-of-type {
+            padding-left: 2rem;
+        }
+
+        &__cell:last-of-type {
+            padding-right: 2rem;
+        }
+
+        &__cell--inline {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        &__link {
+            text-decoration: underline;
+            color: #2e8aea;
+        }
+
+        &__footer {
+            text-align: center;
+        }
+
+        &__row--selected {
+            background: fade(#2e8aea, 15%) !important;
+            border-bottom: 0 !important;
+        }
+
+        &__title {
+            font-size: 16px;
+            line-height: 1;
+            font-weight: 700;
+            display: inline-block;
+            margin: 1rem 2rem 1rem 0;
+            position: relative;
+            top: .3rem;
+        }
+    }
+
+    .c-pag {
+        &__list {
+            display: block;
+            letter-spacing: -.31em;
+            list-style: none;
+            font-size: 13px;
+            margin: 0;
+
+            .spacer {
+                padding: 0 .8rem 0 .4rem;
+            }
+        }
+
+        &__item {
+            display: inline-block;
+            letter-spacing: 0;
+        }
+
+        &__link {
+            background: #F8F8F8;
+            border: 1px solid #d9d9d9;
+            padding: .4rem .8rem;
+            margin: 0 .6rem 0 0;
+            transition: .4s ease-in-out all
+        }
+
+        &__link:hover {
+            background: #1d1d1d;
+            color: #FFF;
+        }
+
+        &__link--active, &__link--active:hover {
+            color: #FFF;
+            background: #625a74;
+        }
+    }
+}

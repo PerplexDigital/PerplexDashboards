@@ -1,0 +1,10 @@
+<div ng-controller="Perplex.List.Controller as vm">
+    <input type="text" ng-model="vm.state.search.filters.search" ng-change="vm.fn.search()" />
+    <perplex-paged-listview 
+        items="vm.state.search.results.items" 
+        paging="vm.state.search.results.paging" 
+        goto-page="vm.fn.gotoPage"        
+        columns="vm.state.columns"         
+        commands="vm.state.commands"
+    ></perplex-paged-listview>
+</div>

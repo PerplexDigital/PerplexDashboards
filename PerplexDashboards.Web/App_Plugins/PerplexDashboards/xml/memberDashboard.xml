@@ -1,0 +1,15 @@
+﻿<section alias="PerplexDashboards_MemberDashboard">
+  <areas>
+    <area>member</area>
+  </areas>
+  <tab caption="Locked Accounts">
+    <control showOnce="false" addPanel="true">/App_Plugins/PerplexDashboards/MemberDashboard/html/LockedMemberAccounts.html</control>
+  </tab>
+  <tab caption="Unapproved Accounts">
+    <control showOnce="false" addPanel="true">/App_Plugins/PerplexDashboards/MemberDashboard/html/UnapprovedMemberAccounts.html</control>
+  </tab>
+
+  <tab caption="Activity Log">
+    <control showOnce="false" addPanel="true">/App_Plugins/PerplexDashboards/MemberDashboard/html/MembersLog.html</control>
+  </tab>
+</section>
