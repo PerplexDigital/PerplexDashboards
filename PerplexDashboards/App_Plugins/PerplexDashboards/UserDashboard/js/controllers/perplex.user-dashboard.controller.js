@@ -3,7 +3,8 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
     "notificationsService",
     "$location",
     "$timeout",
-    function(perplexUserDashboardApi, notificationsService, $location, $timeout) {
+    "$scope",
+    function(perplexUserDashboardApi, notificationsService, $location, $timeout, $scope) {
         var vm = this;
 
         var state = (vm.state = {
@@ -74,7 +75,9 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
             timeout: 333,
 
             // Result of $timeout
-            timer: null
+            timer: null,
+
+            isLoading: true
         });
 
         var fn = (vm.fn = {
@@ -118,7 +121,7 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                     return;
                 }
 
-                state.isLoading = true;
+                state.search.isLoading = true;
 
                 if (page != null) {
                     state.search.filters.Page = page;
@@ -130,7 +133,7 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                         state.search.results = response.data;
                     }, fn.onError)
                     .always(function() {
-                        state.isLoading = false;
+                        state.search.isLoading = false;
                     });
             },
 
@@ -143,15 +146,28 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                 return error.data.Message || error.statusText;
             },
 
+            parseDate(date) {
+                if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+                    return date;
+                }
+
+                if (/^\d{4}-\d{2}-\d{2}/.test(date)) {
+                    return date.substr(0, 10);
+                }
+
+                return null;
+            },
+
             getValue: function(name) {
                 switch (name) {
                     case "From":
                         return function() {
-                            return state.search.filters.From;
+                            console.log("getValue() | " + name + " | " + state.search.filters.From);
+                            return fn.parseDate(state.search.filters.From);
                         };
                     case "To":
                         return function() {
-                            return state.search.filters.To;
+                            return fn.parseDate(state.search.filters.To);
                         };
                 }
             },

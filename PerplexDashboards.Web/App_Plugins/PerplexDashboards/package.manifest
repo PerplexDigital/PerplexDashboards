@@ -53,11 +53,14 @@
 
     "~/App_Plugins/PerplexDashboards/Perplex.OnTabFocus/perplex.map.factory.js",
     "~/App_Plugins/PerplexDashboards/Perplex.OnTabFocus/perplex.on-tab-focus.directive.js",
-    "~/App_Plugins/PerplexDashboards/Perplex.OnTabFocus/perplex.on-tab-focus.service.js"
+    "~/App_Plugins/PerplexDashboards/Perplex.OnTabFocus/perplex.on-tab-focus.service.js",
+
+    "~/App_Plugins/PerplexDashboards/Perplex.Loader/js/perplex.loader.directive.js"
   ],
 
   "css": [
     "~/App_Plugins/PerplexDashboards/css/perplex.user-dashboard.css",
-    "~/App_Plugins/PerplexDashboards/css/perplex.paged-listview.css"
+    "~/App_Plugins/PerplexDashboards/css/perplex.paged-listview.css",
+    "~/App_Plugins/PerplexDashboards/Perplex.Loader/css/perplex.loader.css"
   ]
 }

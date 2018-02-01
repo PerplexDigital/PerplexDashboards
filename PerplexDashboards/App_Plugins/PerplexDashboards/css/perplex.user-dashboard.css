@@ -8,7 +8,7 @@
   margin: 0;
 }
 .perplex-user-dashboard .umb-control-group .umb-datepicker .datepicker .datepickerinput {
-  width: 125px;
+  width: 120px;
 }
 .perplex-user-dashboard .umb-control-group .umb-datepicker p {
   margin-top: 5px;
@@ -17,7 +17,7 @@
   display: flex;
 }
 .perplex-user-dashboard .filter-container > * {
-  margin-left: 1em;
+  margin-left: 2em;
 }
 .perplex-user-dashboard .filter-container > *:first-child {
   margin-left: 0;
@@ -27,4 +27,7 @@
 }
 .perplex-user-dashboard .filter-container .block {
   display: block;
+}
+.perplex-user-dashboard .filter-container .ip {
+  width: 140px;
 }

@@ -19,6 +19,8 @@ namespace PerplexDashboards.Models.UserDashboard
         {
             Filters = new Filters
             {
+                From = DateTime.Today.AddMonths(-1),
+                To = DateTime.Today,
                 Page = 1,
                 PageSize = 10
             };

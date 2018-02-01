@@ -242,6 +242,7 @@
     <None Include="App_Plugins\PerplexDashboards\css\perplex.paged-listview.less" />
     <None Include="App_Plugins\PerplexDashboards\css\perplex.user-dashboard.less" />
     <None Include="App_Plugins\PerplexDashboards\package.manifest" />
+    <None Include="App_Plugins\PerplexDashboards\Perplex.Loader\css\perplex.loader.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -263,6 +264,10 @@
     </Content>
     <Content Include="App_Plugins\PerplexDashboards\html\perplex.paged-listview.html" />
     <Content Include="App_Plugins\PerplexDashboards\html\perplex.render-property.html" />
+    <Content Include="App_Plugins\PerplexDashboards\Perplex.Loader\css\perplex.loader.css" />
+    <Content Include="App_Plugins\PerplexDashboards\Perplex.Loader\html\perplex.loader.html" />
+    <Content Include="App_Plugins\PerplexDashboards\Perplex.Loader\img\perplex.loader.gif" />
+    <Content Include="App_Plugins\PerplexDashboards\Perplex.Loader\js\perplex.loader.directive.js" />
     <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.map.factory.js" />
     <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.on-tab-focus.directive.js" />
     <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.on-tab-focus.service.js" />
