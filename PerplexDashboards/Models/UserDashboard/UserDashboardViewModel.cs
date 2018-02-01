@@ -1,16 +1,19 @@
-﻿using System;
+﻿using PerplexDashboards.Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Umbraco.Core;
+using Umbraco.Core.Auditing;
 using Umbraco.Core.Services;
 
 namespace PerplexDashboards.Models.UserDashboard
 {
     public class UserDashboardViewModel
     {
-        public Filters Filters { get; set; }
-        public SearchResults<ApiUserLogItem> SearchResults { get; set; }
-        public IEnumerable<ApiUser> Users { get; set; }
+        public Filters Filters { get; }
+        public SearchResults<ApiUserLogItem> SearchResults { get; }
+        public IEnumerable<ApiUser> Users { get; }
+        public IList<KeyValuePair<int, string>> Events { get; }
 
         public UserDashboardViewModel(IUserService userService, DatabaseContext databaseContext = null)
         {
@@ -30,6 +33,10 @@ namespace PerplexDashboards.Models.UserDashboard
                     Id = u.Id,
                     Name = u.Name
                 });
+
+            Events = Enums.Values<AuditEvent>()
+                .ToDictionary(ae => (int)ae, ae => ae.ToString())
+                .ToList();
         }
     }
 }

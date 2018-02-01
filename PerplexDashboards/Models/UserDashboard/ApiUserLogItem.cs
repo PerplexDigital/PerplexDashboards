@@ -55,9 +55,16 @@ namespace PerplexDashboards.Models.UserDashboard
 
         public static SearchResults<ApiUserLogItem> Search(Filters filters, DatabaseContext databaseContext = null)
         {
-            // Very basic filtering / pagination done here and not in DB
+            // Very basic filtering / pagination done here and not in DB.
+            // This would be a very good optimization obviously, fetching all records first
+            // then filtering is highly inefficient.
             List<ApiUserLogItem> all = UserLogItem.GetAll(databaseContext)
-                .Where(i => !filters.UserId.HasValue || (i.UserId == filters.UserId || i.AffectedUserId == filters.UserId))
+                .Where(i => 
+                    (!filters.UserId.HasValue || (i.UserId == filters.UserId || i.AffectedUserId == filters.UserId)) &&
+                    (filters.From == null || i.Timestamp >= filters.From) &&
+                    (filters.To == null || i.Timestamp <= filters.To) &&
+                    (filters.Event == null || (int) filters.Event == i.AuditEvent)
+                )
                 .OrderByDescending(ia => ia.Timestamp)
                 .Select(i => new ApiUserLogItem(i))                             
                 .ToList();

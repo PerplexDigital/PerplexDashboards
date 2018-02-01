@@ -6,11 +6,17 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
         var vm = this;
 
         var state = (vm.state = {
+            // List of { Key: ..., Value: ... }, with Key being the integer value of the AuditEvent enum and Value being the AuditEvent string representation
+            events: [],
+
             search: {
                 filters: {
                     Page: 1,
                     PageSize: 0,
-                    UserId: null
+                    UserId: null,
+                    From: null,
+                    To: null,
+                    Event: null
                 },
 
                 results: {
@@ -71,10 +77,16 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                 perplexUserDashboardApi
                     .GetViewModel()
                     .then(function(response) {
-                        state.search.filters = response.data.Filters;
-                        state.search.results = response.data.SearchResults;
+                        var viewModel = response.data;
+                        if (viewModel == null) {
+                            return;
+                        }
 
-                        state.users = response.data.Users;
+                        state.search.filters = viewModel.Filters;
+                        state.search.results = viewModel.SearchResults;
+
+                        state.events = viewModel.Events;
+                        state.users = viewModel.Users;
                     })
                     .always(function() {
                         state.isLoading = false;
@@ -112,7 +124,5 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                 return error.data.Message || error.statusText;
             }
         });
-
-        fn.init();
     }
 ]);
