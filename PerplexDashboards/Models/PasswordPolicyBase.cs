@@ -17,8 +17,7 @@ namespace PerplexDashboards.Models
 
         // TODO
         public int PasswordHistory { get; set; }
-        public int? MaximumPasswordAge { get; set; }        
-        public bool ForgotPasswordLinkAvailable { get; set; }
+        public int? MaximumPasswordAge { get; set; }                
 
         public PasswordPolicyBase() {}
 
@@ -28,7 +27,7 @@ namespace PerplexDashboards.Models
             MinRequiredNonAlphanumericCharacters = provider.MinRequiredNonAlphanumericCharacters;
             MaxInvalidPasswordAttempts = provider.MaxInvalidPasswordAttempts;
             UseLegacyEncoding = provider.UseLegacyEncoding;
-            PasswordStorageFormat = provider.PasswordFormat.ToString();
+            PasswordStorageFormat = provider.PasswordFormat.ToString();            
         }
     }
 }

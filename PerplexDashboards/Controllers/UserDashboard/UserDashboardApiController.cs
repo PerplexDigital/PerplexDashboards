@@ -2,6 +2,8 @@
 using System.Web.Http;
 using System.Web.Security;
 using Umbraco.Core;
+using Umbraco.Core.Configuration;
+using Umbraco.Core.Configuration.UmbracoSettings;
 using Umbraco.Web.Security.Providers;
 using Umbraco.Web.WebApi;
 
@@ -33,7 +35,8 @@ namespace PerplexDashboards.Controllers.UserDashboard
                 return null;
             }
 
-            return new UserPasswordPolicy(userMembershipProvider);            
+            IUmbracoSettingsSection umbracoSettings = UmbracoConfig.For.UmbracoSettings();
+            return new UserPasswordPolicy(userMembershipProvider, umbracoSettings);
         }
     }
 }
