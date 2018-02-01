@@ -138,7 +138,7 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
             },
 
             onError: function(error) {
-                notificationsService.error("Error", getErrorMessage(error));
+                notificationsService.error("Error", fn.getErrorMessage(error));
             },
 
             getErrorMessage: function(error) {
