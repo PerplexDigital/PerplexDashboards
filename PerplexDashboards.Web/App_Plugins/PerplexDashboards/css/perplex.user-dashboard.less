@@ -1,5 +1,43 @@
 .perplex-user-dashboard {
-    select {
+    .umb-control-group {
+        padding: 0;
         margin: 0;
+        margin-bottom: 0 !important;
+        border-bottom: none;
+
+        .umb-datepicker {
+            .datepicker {
+                margin: 0;
+
+                .datepickerinput {
+                    width: 125px;
+                }
+            }
+
+            p {
+                margin-top: 5px;
+            }
+        }
+    }
+
+
+    .filter-container {
+        display: flex;
+
+        > * {
+            margin-left: 1em;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+
+        select {
+            margin: 0;            
+        }
+
+        .block {
+            display: block;
+        }
     }
 }

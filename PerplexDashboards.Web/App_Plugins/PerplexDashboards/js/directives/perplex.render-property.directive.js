@@ -9,7 +9,8 @@ angular.module("umbraco").directive("perplexRenderProperty", [
                 description: "=?",
                 showLabel: "=?",
                 getValue: "&?",
-                setValue: "&?"
+                setValue: "&?",
+                onChange: "&?"
             },
 
             restrict: "E",
@@ -19,6 +20,7 @@ angular.module("umbraco").directive("perplexRenderProperty", [
             controller: function($scope) {
                 var getValue = $scope.getValue();
                 var setValue = $scope.setValue();
+                var onChange = $scope.onChange();
 
                 renderPropertyService.getPropertyTypeScaffold($scope.alias, $scope.name).then(
                     function(propertyTypeScaffold) {
@@ -36,6 +38,10 @@ angular.module("umbraco").directive("perplexRenderProperty", [
                                 },
                                 set: function(value) {
                                     setValue(value);
+
+                                    if (typeof onChange === "function") {
+                                        onChange(value);
+                                    }
                                 }
                             });
                         }

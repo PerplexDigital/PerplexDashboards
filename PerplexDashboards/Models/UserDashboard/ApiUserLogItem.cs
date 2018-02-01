@@ -61,9 +61,10 @@ namespace PerplexDashboards.Models.UserDashboard
             List<ApiUserLogItem> all = UserLogItem.GetAll(databaseContext)
                 .Where(i => 
                     (!filters.UserId.HasValue || (i.UserId == filters.UserId || i.AffectedUserId == filters.UserId)) &&
-                    (filters.From == null || i.Timestamp >= filters.From) &&
-                    (filters.To == null || i.Timestamp <= filters.To) &&
-                    (filters.Event == null || (int) filters.Event == i.AuditEvent)
+                    (filters.From == null || i.Timestamp.Date >= filters.From.Value.Date) &&
+                    (filters.To == null || i.Timestamp.Date <= filters.To.Value.Date) &&
+                    (filters.Event == null || (int) filters.Event == i.AuditEvent) &&
+                    (string.IsNullOrEmpty(filters.IpAddress) || filters.IpAddress == i.IpAddress)
                 )
                 .OrderByDescending(ia => ia.Timestamp)
                 .Select(i => new ApiUserLogItem(i))                             

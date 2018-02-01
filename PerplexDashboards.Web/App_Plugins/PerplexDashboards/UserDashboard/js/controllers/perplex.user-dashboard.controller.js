@@ -2,7 +2,8 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
     "perplexUserDashboardApi",
     "notificationsService",
     "$location",
-    function(perplexUserDashboardApi, notificationsService, $location) {
+    "$timeout",
+    function(perplexUserDashboardApi, notificationsService, $location, $timeout) {
         var vm = this;
 
         var state = (vm.state = {
@@ -67,7 +68,13 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                         $location.url("/users/users/user/" + item.AffectedUserId + "?subview=users");
                     }
                 }
-            ]
+            ],
+
+            // Debounce timeout
+            timeout: 333,
+
+            // Result of $timeout
+            timer: null
         });
 
         var fn = (vm.fn = {
@@ -98,7 +105,19 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                 fn.search();
             },
 
-            search: function(page) {
+            search: function(page, useTimeout) {
+                if (useTimeout) {
+                    if (state.timer != null) {
+                        $timeout.cancel(state.timer);
+                    }
+
+                    state.timer = $timeout(function() {
+                        fn.search(page);
+                    }, state.timeout);
+
+                    return;
+                }
+
                 state.isLoading = true;
 
                 if (page != null) {
@@ -122,6 +141,36 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
             getErrorMessage: function(error) {
                 if (typeof error.data === "string") return error.data;
                 return error.data.Message || error.statusText;
+            },
+
+            getValue: function(name) {
+                switch (name) {
+                    case "From":
+                        return function() {
+                            return state.search.filters.From;
+                        };
+                    case "To":
+                        return function() {
+                            return state.search.filters.To;
+                        };
+                }
+            },
+
+            setValue: function(name) {
+                switch (name) {
+                    case "From":
+                        return function(value) {
+                            state.search.filters.From = value;
+                        };
+                    case "To":
+                        return function(value) {
+                            state.search.filters.To = value;
+                        };
+                }
+            },
+
+            onChange: function() {
+                fn.search(1);
             }
         });
     }
