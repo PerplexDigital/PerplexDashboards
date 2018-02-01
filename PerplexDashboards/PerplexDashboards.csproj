@@ -263,6 +263,9 @@
     </Content>
     <Content Include="App_Plugins\PerplexDashboards\html\perplex.paged-listview.html" />
     <Content Include="App_Plugins\PerplexDashboards\html\perplex.render-property.html" />
+    <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.map.factory.js" />
+    <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.on-tab-focus.directive.js" />
+    <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.on-tab-focus.service.js" />
     <Content Include="App_Plugins\PerplexDashboards\UserDashboard\html\perplex.user-dashboard.html" />
     <Content Include="App_Plugins\PerplexDashboards\UserDashboard\js\controllers\perplex.user-dashboard.controller.js" />
     <Content Include="App_Plugins\PerplexDashboards\js\directives\perplex.paged-listview.directive.js" />

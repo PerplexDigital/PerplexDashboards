@@ -45,11 +45,15 @@
 
     "~/App_Plugins/PerplexDashboards/UserDashboard/js/controllers/perplex.user-dashboard.controller.js",
     "~/App_Plugins/PerplexDashboards/UserDashboard/js/services/perplex.user-dashboard.api.service.js",
-    
+
     "~/App_Plugins/PerplexDashboards/MemberDashboard/js/services/perplex.member-dashboard.api.service.js",
     "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/LockedMembersListView/LockedMembersListView.controller.js",
     "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/UnapprovedMembersListView/UnapprovedMembersListView.controller.js",
-    "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/MembersLogListView/MembersLogListView.controller.js"
+    "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/MembersLogListView/MembersLogListView.controller.js",
+
+    "~/App_Plugins/PerplexDashboards/Perplex.OnTabFocus/perplex.map.factory.js",
+    "~/App_Plugins/PerplexDashboards/Perplex.OnTabFocus/perplex.on-tab-focus.directive.js",
+    "~/App_Plugins/PerplexDashboards/Perplex.OnTabFocus/perplex.on-tab-focus.service.js"
   ],
 
   "css": [

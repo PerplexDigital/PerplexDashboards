@@ -61,17 +61,6 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                         $location.url("/users/users/user/" + item.AffectedUserId + "?subview=users");
                     }
                 }
-            ],
-
-            commands: [
-                {
-                    name: "Disable",
-                    icon: "icon-disable",
-                    fn: function(items) {
-                        var ids = items.map(item => item.Id);
-                        console.log("ids", ids);
-                    }
-                }
             ]
         });
 

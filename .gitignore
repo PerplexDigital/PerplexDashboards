@@ -315,3 +315,4 @@ __pycache__/
 */[Uu]mbraco_[Cc]lient/
 
 .svn/
+PerplexDashboards.Web/App_Data/Umbraco.sdf
