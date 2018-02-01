@@ -1,9 +1,7 @@
 angular.module("umbraco").service("perplexUserDashboardApi", [
     "$http",
     function($http) {
-        var self = this;
-
-        self.API_ROOT = "/umbraco/backoffice/api/userdashboardapi/";
+        this.API_ROOT = "/umbraco/backoffice/api/userdashboardapi/";
 
         this.GetViewModel = function() {
             return get("GetViewModel");
@@ -14,11 +12,11 @@ angular.module("umbraco").service("perplexUserDashboardApi", [
         };
 
         function get(name, params) {
-            return $http.get(self.API_ROOT + name);
+            return $http.get(this.API_ROOT + name);
         }
 
         function post(name, args, timeout) {
-            return $http.post(self.API_ROOT + name, args, { timeout: timeout && timeout.promise });
+            return $http.post(this.API_ROOT + name, args, { timeout: timeout && timeout.promise });
         }
     }
 ]);
