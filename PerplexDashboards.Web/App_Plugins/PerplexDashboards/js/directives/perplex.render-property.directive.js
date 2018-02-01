@@ -32,19 +32,32 @@ angular.module("umbraco").directive("perplexRenderProperty", [
 
                         // The property's value will be stored externally
                         // using get / set functions, if available
-                        if (typeof getValue === "function" && typeof setValue === "function") {
-                            Object.defineProperty($scope.property, "value", {
-                                get: function() {
-                                    return getValue();
-                                },
-                                set: function(value) {
-                                    setValue(value);
+                        var getValueIsFn = typeof getValue === "function";
+                        var setValueIsFn = typeof setValue === "function";
+                        var onChangeIsFn = typeof onChange === "function";
 
-                                    if (typeof onChange === "function") {
+                        if (getValueIsFn || setValueIsFn || onChangeIsFn) {
+                            var attributes = {};
+
+                            if (getValueIsFn) {
+                                attributes.get = function() {
+                                    return getValue();
+                                };
+                            }
+
+                            if (setValueIsFn || onChangeIsFn) {
+                                attributes.set = function(value) {
+                                    if (setValueIsFn) {
+                                        setValue(value);
+                                    }
+
+                                    if (onChangeIsFn) {
                                         onChange(value);
                                     }
-                                }
-                            });
+                                };
+                            }
+
+                            Object.defineProperty($scope.property, "value", attributes);
                         }
                     },
                     function(error) {

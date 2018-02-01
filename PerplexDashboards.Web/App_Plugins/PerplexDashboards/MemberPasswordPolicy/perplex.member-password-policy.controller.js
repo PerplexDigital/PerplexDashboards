@@ -4,7 +4,9 @@ angular.module("umbraco").controller("Perplex.MemberPasswordPolicy.Controller", 
         var vm = this;
 
         var state = (vm.state = {
-            isLoading: true
+            isLoading: true,
+
+            passwordPolicy: null
         });
 
         var fn = (vm.fn = {
@@ -31,29 +33,15 @@ angular.module("umbraco").controller("Perplex.MemberPasswordPolicy.Controller", 
             },
 
             getValue: function(name) {
-                switch (name) {
-                    case "From":
-                        return function() {
-                            return fn.parseDate(state.search.filters.From);
-                        };
-                    case "To":
-                        return function() {
-                            return fn.parseDate(state.search.filters.To);
-                        };
-                }
-            },
+                return function() {
+                    var value = state.passwordPolicy[name];
+                    if (value == null) {
+                        return value;
+                    }
 
-            setValue: function(name) {
-                switch (name) {
-                    case "From":
-                        return function(value) {
-                            state.search.filters.From = value;
-                        };
-                    case "To":
-                        return function(value) {
-                            state.search.filters.To = value;
-                        };
-                }
+                    // Should be a string for the Umbraco.NoEdit datatype
+                    return "" + value;
+                };
             }
         });
     }

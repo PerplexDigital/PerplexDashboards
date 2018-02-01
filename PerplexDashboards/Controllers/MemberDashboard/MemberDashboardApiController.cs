@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Globalization;
 using System.Net;
 using PerplexDashboards.Models.MemberDashboard;
+using System.Web.Security;
+using Umbraco.Web.Security.Providers;
 
 namespace PerplexDashboards.Controllers.MemberDashboard
 {
@@ -289,13 +291,14 @@ namespace PerplexDashboards.Controllers.MemberDashboard
         [HttpGet]
         public MemberPasswordPolicy GetPasswordPolicy()
         {
-            return new MemberPasswordPolicy
+            MembersMembershipProvider membersMembershipProvider = Membership.Providers["UmbracoMembershipProvider"] as MembersMembershipProvider;
+
+            if (membersMembershipProvider == null)
             {
-                ForgotPasswordLinkAvailable = true,
-                MaximumPasswordPage = 5,
-                MinimumNonAlphaNumericCharacters = 7,
-                PasswordHistory = 3
-            };
+                return null;
+            }
+
+            return new MemberPasswordPolicy(membersMembershipProvider);            
         }
     }
 }

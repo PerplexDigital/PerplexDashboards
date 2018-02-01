@@ -9,6 +9,9 @@ using System.IO;
 using System.Xml.XPath;
 using PerplexDashboards.Models.UserDashboard;
 using PerplexDashboards.Models.MemberDashboard;
+using Umbraco.Web.Security.Providers;
+using System.Web.Security;
+using System.Diagnostics;
 
 namespace PerplexDashboards.Code
 {
@@ -21,16 +24,16 @@ namespace PerplexDashboards.Code
             CreateDatabaseTablesIfNeeded(appCtx.DatabaseContext, appCtx.ProfilingLogger.Logger);
 
             base.ApplicationStarting(umbApp, appCtx);
-        }
+        }        
 
         private delegate void HandleUserEvent(object o, EventArgs e);
 
         private void RegisterUserEvents(DatabaseContext dbCtx)
         {
             // Inject DatabaseContext into event handler
-            EventHandler userEventHandler = (o, e) => 
+            EventHandler userEventHandler = (o, e) =>
                 UsersMembershipProviderEventHandler(e, dbCtx);
-
+            
             BackOfficeUserManager.AccountLocked += userEventHandler;
             BackOfficeUserManager.AccountUnlocked += userEventHandler;
             BackOfficeUserManager.ForgotPasswordRequested += userEventHandler;

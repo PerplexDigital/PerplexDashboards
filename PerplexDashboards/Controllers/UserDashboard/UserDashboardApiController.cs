@@ -1,6 +1,8 @@
 ﻿using PerplexDashboards.Models.UserDashboard;
 using System.Web.Http;
+using System.Web.Security;
 using Umbraco.Core;
+using Umbraco.Web.Security.Providers;
 using Umbraco.Web.WebApi;
 
 namespace PerplexDashboards.Controllers.UserDashboard
@@ -24,13 +26,14 @@ namespace PerplexDashboards.Controllers.UserDashboard
         [HttpGet]
         public UserPasswordPolicy GetPasswordPolicy()
         {
-            return new UserPasswordPolicy
+            UsersMembershipProvider userMembershipProvider = Membership.Providers["UsersMembershipProvider"] as UsersMembershipProvider;
+
+            if (userMembershipProvider == null)
             {
-                ForgotPasswordLinkAvailable = true,
-                MaximumPasswordPage = 5,
-                MinimumNonAlphaNumericCharacters = 7,
-                PasswordHistory = 3
-            };
+                return null;
+            }
+
+            return new UserPasswordPolicy(userMembershipProvider);            
         }
     }
 }
