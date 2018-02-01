@@ -20,5 +20,17 @@ namespace PerplexDashboards.Controllers.UserDashboard
         {          
             return ApiUserLogItem.Search(filters, DbContext);
         }
+
+        [HttpGet]
+        public UserPasswordPolicy GetPasswordPolicy()
+        {
+            return new UserPasswordPolicy
+            {
+                ForgotPasswordLinkAvailable = true,
+                MaximumPasswordPage = 5,
+                MinimumNonAlphaNumericCharacters = 7,
+                PasswordHistory = 3
+            };
+        }
     }
 }

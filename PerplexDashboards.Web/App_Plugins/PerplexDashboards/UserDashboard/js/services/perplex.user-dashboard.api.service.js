@@ -11,6 +11,10 @@ angular.module("umbraco").service("perplexUserDashboardApi", [
             return post("Search", filters, timeout);
         };
 
+        this.GetPasswordPolicy = function() {
+            return get("GetPasswordPolicy");
+        };
+
         function get(name, params) {
             return $http.get(API_ROOT + name);
         }

@@ -1,6 +1,7 @@
 angular.module("umbraco").directive("perplexRenderProperty", [
     "perplexRenderPropertyService",
-    function(renderPropertyService) {
+    "$timeout",
+    function(renderPropertyService, $timeout) {
         return {
             scope: {
                 alias: "=",

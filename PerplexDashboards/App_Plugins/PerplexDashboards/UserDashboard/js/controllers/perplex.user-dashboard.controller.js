@@ -162,7 +162,6 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                 switch (name) {
                     case "From":
                         return function() {
-                            console.log("getValue() | " + name + " | " + state.search.filters.From);
                             return fn.parseDate(state.search.filters.From);
                         };
                     case "To":

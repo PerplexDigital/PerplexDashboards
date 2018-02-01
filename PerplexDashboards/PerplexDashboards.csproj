@@ -216,6 +216,8 @@
     <Compile Include="Code\Extensions.cs" />
     <Compile Include="Controllers\MemberDashboard\MemberDashboardApiController.cs" />
     <Compile Include="Controllers\UserDashboard\UserDashboardApiController.cs" />
+    <Compile Include="Models\MemberDashboard\MemberPasswordPolicy.cs" />
+    <Compile Include="Models\PasswordPolicyBase.cs" />
     <Compile Include="Models\MemberDashboard\BaseListViewResponse.cs" />
     <Compile Include="Models\MemberDashboard\BaseMemberAccount.cs" />
     <Compile Include="Models\MemberDashboard\ListViewRequest.cs" />
@@ -233,6 +235,7 @@
     <Compile Include="Models\UserDashboard\UserDashboardViewModel.cs" />
     <Compile Include="Models\UserDashboard\UserLogItem.cs" />
     <Compile Include="Models\UserDashboard\ApiUserLogItem.cs" />
+    <Compile Include="Models\UserDashboard\UserPasswordPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -252,9 +255,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Plugins\PerplexDashboards\UserDashboard\css\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="App_Plugins\PerplexDashboards\css\perplex.paged-listview.css">
       <DependentUpon>perplex.paged-listview.less</DependentUpon>
@@ -271,6 +272,10 @@
     <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.map.factory.js" />
     <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.on-tab-focus.directive.js" />
     <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.on-tab-focus.service.js" />
+    <Content Include="App_Plugins\PerplexDashboards\MemberPasswordPolicy\perplex.member-password-policy.controller.js" />
+    <Content Include="App_Plugins\PerplexDashboards\MemberPasswordPolicy\perplex.member-password-policy.html" />
+    <Content Include="App_Plugins\PerplexDashboards\UserPasswordPolicy\perplex.user-password-policy.html" />
+    <Content Include="App_Plugins\PerplexDashboards\UserPasswordPolicy\perplex.user-password-policy.controller.js" />
     <Content Include="App_Plugins\PerplexDashboards\UserDashboard\html\perplex.user-dashboard.html" />
     <Content Include="App_Plugins\PerplexDashboards\UserDashboard\js\controllers\perplex.user-dashboard.controller.js" />
     <Content Include="App_Plugins\PerplexDashboards\js\directives\perplex.paged-listview.directive.js" />

@@ -285,5 +285,17 @@ namespace PerplexDashboards.Controllers.MemberDashboard
 
             return true;
         }
+
+        [HttpGet]
+        public MemberPasswordPolicy GetPasswordPolicy()
+        {
+            return new MemberPasswordPolicy
+            {
+                ForgotPasswordLinkAvailable = true,
+                MaximumPasswordPage = 5,
+                MinimumNonAlphaNumericCharacters = 7,
+                PasswordHistory = 3
+            };
+        }
     }
 }

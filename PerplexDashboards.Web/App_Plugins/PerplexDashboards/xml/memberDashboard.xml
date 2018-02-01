@@ -12,4 +12,8 @@
   <tab caption="Activity Log">
     <control showOnce="false" addPanel="true">/App_Plugins/PerplexDashboards/MemberDashboard/html/MembersLog.html</control>
   </tab>
+
+  <tab caption="Password Policy">
+    <control showOnce="true" addPanel="true" panelCaption="">/App_Plugins/PerplexDashboards/MemberPasswordPolicy/perplex.member-password-policy.html</control>
+  </tab>
 </section>
