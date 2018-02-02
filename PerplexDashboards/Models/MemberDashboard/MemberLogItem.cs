@@ -123,8 +123,7 @@ namespace PerplexDashboards.Models.MemberDashboard
 
                 if (!string.IsNullOrEmpty(filters.IpAddress))
                 {
-                    // TODO: Broken
-                    // sql = sql.Where($"{nameof(IP)} LIKE '%' + @0 + '%'", new[] { filters.IpAddress });
+                    sql = sql.Where($"{nameof(IP)} LIKE @0", new[] { $"%{filters.IpAddress}%" });
                 }
             }
 

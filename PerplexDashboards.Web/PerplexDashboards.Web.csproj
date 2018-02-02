@@ -297,7 +297,6 @@
     <Content Include="config\imageprocessor\cache.config" />
     <Content Include="App_Plugins\ModelsBuilder\package.manifest" />
     <Content Include="Media\Web.config" />
-    <Content Include="config\umbracoSettings.config" />
     <Content Include="config\trees.config" />
     <Content Include="config\tinyMceConfig.config" />
     <Content Include="config\scripting.config" />
@@ -320,6 +319,8 @@
     <Content Include="App_Plugins\Terratype\package.manifest" />
     <Content Include="App_Plugins\Terratype\Views\grid.cshtml" />
     <Content Include="App_Plugins\Perplex.List\package.manifest" />
+    <Content Include="config\umbracoSettings.config" />
+    <Content Include="config\userDashboardSettings.config" />
     <None Include="packages.config" />
     <Content Include="Scripts\umbraco-starterkit-app.js" />
     <Content Include="Views\Web.config" />

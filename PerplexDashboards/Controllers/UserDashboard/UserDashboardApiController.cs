@@ -1,5 +1,7 @@
 ﻿using PerplexDashboards.Models;
 using PerplexDashboards.Models.UserDashboard;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Security;
 using Umbraco.Core;
@@ -18,7 +20,20 @@ namespace PerplexDashboards.Controllers.UserDashboard
         public UserDashboardViewModel GetViewModel()
         {
             return new UserDashboardViewModel(Services.UserService, DbContext);
-        }        
+        }
+
+        [HttpGet]
+        public EmailSettings GetEmailSettings()
+        {
+            return new EmailSettings(UserDashboardSettings.Get);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage SaveEmailSettings(EmailSettings settings)
+        {
+            settings.Save();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
 
         [HttpPost]
         public SearchResults<ApiUserLogItem> Search(UserFilters filters)

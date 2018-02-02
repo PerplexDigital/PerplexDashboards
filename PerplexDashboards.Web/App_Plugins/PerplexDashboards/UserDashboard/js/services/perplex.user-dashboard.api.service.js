@@ -7,12 +7,20 @@ angular.module("umbraco").service("Perplex.UserDashboard.Api", [
             return get("GetViewModel");
         };
 
+        this.GetEmailSettings = function() {
+            return get("GetEmailSettings");
+        };
+
         this.Search = function(filters, timeout) {
             return post("Search", filters, timeout);
         };
 
         this.GetPasswordPolicy = function() {
             return get("GetPasswordPolicy");
+        };
+
+        this.SaveEmailSettings = function(settings) {
+            return post("SaveEmailSettings", settings);
         };
 
         function get(name, params) {

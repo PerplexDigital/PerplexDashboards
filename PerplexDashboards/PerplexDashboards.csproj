@@ -213,9 +213,11 @@
   <ItemGroup>
     <Compile Include="Code\DatabaseHelper.cs" />
     <Compile Include="Code\Constants.cs" />
+    <Compile Include="Code\EmailService.cs" />
     <Compile Include="Code\Enums.cs" />
     <Compile Include="Code\PerplexDashboardsEventHandler.cs" />
     <Compile Include="Code\Extensions.cs" />
+    <Compile Include="Models\UserDashboard\UserDashboardSettings.cs" />
     <Compile Include="Controllers\MemberDashboard\MemberDashboardApiController.cs" />
     <Compile Include="Controllers\UserDashboard\UserDashboardApiController.cs" />
     <Compile Include="Models\FiltersBase.cs" />
@@ -236,6 +238,7 @@
     <Compile Include="Models\MemberDashboard\UnapprovedMemberAccount.cs" />
     <Compile Include="Models\MemberDashboard\UnapprovedMembersListViewResponse.cs" />
     <Compile Include="Models\UserDashboard\ApiUser.cs" />
+    <Compile Include="Models\UserDashboard\EmailSettings.cs" />
     <Compile Include="Models\UserDashboard\UserFilters.cs" />
     <Compile Include="Models\Paging.cs" />
     <Compile Include="Models\SearchResults.cs" />
@@ -287,6 +290,8 @@
     <Content Include="App_Plugins\PerplexDashboards\Perplex.OnTabFocus\perplex.on-tab-focus.service.js" />
     <Content Include="App_Plugins\PerplexDashboards\MemberPasswordPolicy\perplex.member-password-policy.controller.js" />
     <Content Include="App_Plugins\PerplexDashboards\MemberPasswordPolicy\perplex.member-password-policy.html" />
+    <Content Include="App_Plugins\PerplexDashboards\UserDashboard\html\perplex.user-dashboard.email-settings.html" />
+    <Content Include="App_Plugins\PerplexDashboards\UserDashboard\js\controllers\perplex.user-dashboard.email-settings.controller.js" />
     <Content Include="App_Plugins\PerplexDashboards\UserPasswordPolicy\perplex.user-password-policy.html" />
     <Content Include="App_Plugins\PerplexDashboards\UserPasswordPolicy\perplex.user-password-policy.controller.js" />
     <Content Include="App_Plugins\PerplexDashboards\UserDashboard\html\perplex.user-dashboard.html" />

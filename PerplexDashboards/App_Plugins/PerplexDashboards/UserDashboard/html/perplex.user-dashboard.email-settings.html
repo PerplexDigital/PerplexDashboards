@@ -1,0 +1,22 @@
+<div ng-controller="Perplex.UserDashboard.EmailSettings.Controller as vm"
+    perplex-on-tab-focus="{ once: vm.fn.init }">
+
+    <div class="form-horizontal">
+        <perplex-loader show="vm.state.isLoading" text="Loading ..."></perplex-loader>
+
+        <div ng-if="!vm.state.isLoading">
+            <perplex-render-property ng-repeat="editor in vm.state.propertyEditors"
+                alias="editor.alias"
+                label="editor.label"
+                description="editor.description"
+                get-value="editor.getValue"
+                set-value="editor.setValue">
+            </perplex-render-property>
+    
+            <button type="button" class="btn btn-success" ng-click="vm.fn.save()" ng-disabled="vm.state.isSaving">
+                <span ng-if="vm.state.isSaving">Saving ...</span>
+                <span ng-if="!vm.state.isSaving">Save</span>
+            </button>
+        </div>
+    </div>
+</div>

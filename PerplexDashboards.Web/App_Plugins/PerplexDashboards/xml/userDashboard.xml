@@ -8,4 +8,7 @@
   <tab caption="Password Policy">
     <control showOnce="true" addPanel="true" panelCaption="">/App_Plugins/PerplexDashboards/UserPasswordPolicy/perplex.user-password-policy.html</control>
   </tab>
+  <tab caption="E-mail Settings">
+    <control showOnce="true" addPanel="true" panelCaption="">/App_Plugins/PerplexDashboards/UserDashboard/html/perplex.user-dashboard.email-settings.html</control>
+  </tab>
 </section>

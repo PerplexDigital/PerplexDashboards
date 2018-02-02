@@ -12,6 +12,7 @@ using PerplexDashboards.Models.MemberDashboard;
 using Umbraco.Web.Security.Providers;
 using System.Web.Security;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace PerplexDashboards.Code
 {
@@ -22,6 +23,7 @@ namespace PerplexDashboards.Code
             ConfigureDashboards();
             RegisterUserEvents(appCtx.DatabaseContext);
             CreateDatabaseTablesIfNeeded(appCtx.DatabaseContext, appCtx.ProfilingLogger.Logger);
+            UserDashboardSettings.CreateIfNotExists();
 
             base.ApplicationStarting(umbApp, appCtx);
         }        
@@ -58,9 +60,14 @@ namespace PerplexDashboards.Code
             if (e is IdentityAuditEventArgs eventArgs)
             {
                 LogEvent(eventArgs, dbCtx);
+
+                if (eventArgs.Action == AuditEvent.AccountLocked)
+                {
+                    EmailService.SendLockedAccountEmail(eventArgs.PerformingUser);
+                }
             }
-        }
-        
+        }     
+
         private void LogEvent(IdentityAuditEventArgs eventArgs, DatabaseContext dbCtx)
         {     
             // AffectedUser appears to be 0 all the time, whether it actually affects user 0 or not,

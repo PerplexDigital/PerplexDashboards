@@ -102,8 +102,7 @@ namespace PerplexDashboards.Models.UserDashboard
 
                 if (!string.IsNullOrEmpty(filters.IpAddress))
                 {
-                    // TODO: Broken
-                    // sql = sql.Where($"{nameof(IpAddress)} LIKE '%' + @0 + '%'", new[] { filters.IpAddress });
+                    sql = sql.Where($"{nameof(IpAddress)} LIKE @0", new[] { $"%{filters.IpAddress}%" });
                 }
             }
 
