@@ -2,7 +2,7 @@
     <div class="commands" ng-if="commands.length > 0 && selected.length > 0">
         <button type="button"
             class="btn btn-info"
-            ng-repeat="command in commands" 
+            ng-repeat="command in commands track by command.name" 
             ng-bind="command.name"
             ng-click="runCommand(command)"></button>        
     </div>
