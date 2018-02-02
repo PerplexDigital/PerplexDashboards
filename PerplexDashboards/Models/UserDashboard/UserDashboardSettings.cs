@@ -54,16 +54,19 @@ namespace PerplexDashboards.Models.UserDashboard
 
         public string GetLockedEmailSubject(string username)
         {
-            return LockedEmailSubject                
-                .Replace("[#username#]", username)
-                .Replace("[#datetime#]", $"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}");
+            return ReplaceTags(LockedEmailSubject, username);                            
         }
 
         public string GetLockedEmailBodyHtml(string username)
         {
-            return EmailTemplate
-                .Replace("[#body#]", LockedEmailBody)
+            return ReplaceTags(EmailTemplate.Replace("[#body#]", LockedEmailBody), username);                
+        }
+
+        private string ReplaceTags(string input, string username)
+        {
+            return input                
                 .Replace("[#username#]", username)
+                .Replace("[#website#]", HttpContext.Current?.Request?.Url?.GetLeftPart(UriPartial.Authority))
                 .Replace("[#datetime#]", $"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}");
         }
 
