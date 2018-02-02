@@ -24,8 +24,8 @@
                     Member
                     <small></small>
                 </label>
-                <select class="block" no-dirty-check ng-model="vm.state.search.filters.MemberId" ng-change="vm.fn.search(1)" ng-options="member.Id as member.Name for member in vm.state.members">
-                        <option value="">All members</option>
+                <select class="block" no-dirty-check ng-model="vm.state.search.filters.MemberId" ng-change="vm.fn.search(1)" ng-options="member.Guid as member.Name for member in vm.state.members">
+                    <option value="">All members</option>
                 </select>
             </div>
 
