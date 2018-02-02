@@ -1,6 +1,6 @@
 angular.module("umbraco").controller("Perplex.UserPasswordPolicy.Controller", [
-    "perplexUserDashboardApi",
-    function(perplexUserDashboardApi) {
+    "Perplex.UserDashboard.Api",
+    function(userDashboardApi) {
         var vm = this;
 
         var state = (vm.state = {
@@ -13,7 +13,7 @@ angular.module("umbraco").controller("Perplex.UserPasswordPolicy.Controller", [
             init: function() {
                 state.isLoading = true;
 
-                perplexUserDashboardApi
+                userDashboardApi
                     .GetPasswordPolicy()
                     .then(function(response) {
                         state.passwordPolicy = response.data;

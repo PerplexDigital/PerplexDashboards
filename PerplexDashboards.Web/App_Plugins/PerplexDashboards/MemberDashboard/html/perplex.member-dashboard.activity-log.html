@@ -1,0 +1,60 @@
+<div class="perplex-activity-log" ng-controller="Perplex.MemberDashboard.ActivityLog.Controller as vm"
+    perplex-on-tab-focus="{ once: vm.fn.init }">
+
+    <perplex-loader text="Loading ..." show="vm.state.isLoading"></perplex-loader>
+
+    <div ng-if="!vm.state.isLoading">
+        <div class="filter-container" ng-if="!vm.state.isLoading">
+            <perplex-render-property
+                label="'From'"
+                get-value="vm.fn.getValue('From')"
+                set-value="vm.fn.setValue('From')"
+                on-change="vm.fn.onChange"
+                alias="'Umbraco.Date'"></perplex-render-property>
+
+            <perplex-render-property
+                label="'To'"
+                get-value="vm.fn.getValue('To')"
+                set-value="vm.fn.setValue('To')"
+                on-change="vm.fn.onChange"
+                alias="'Umbraco.Date'"></perplex-render-property>
+
+            <div class="umb-control-group" ng-if="vm.state.members.length > 0">
+                <label class="control-label">
+                    Member
+                    <small></small>
+                </label>
+                <select class="block" no-dirty-check ng-model="vm.state.search.filters.MemberId" ng-change="vm.fn.search(1)" ng-options="member.Id as member.Name for member in vm.state.members">
+                        <option value="">All members</option>
+                </select>
+            </div>
+
+            <div class="umb-control-group">
+                <label class="control-label">
+                    Action
+                    <small></small>
+                </label>
+                <br>
+                <select class="block" no-dirty-check ng-model="vm.state.search.filters.Action" ng-change="vm.fn.search(1)" ng-options="action.Key as action.Value for action in vm.state.actions">
+                    <option value="">All actions</option>
+                </select>
+            </div>
+
+            <div class="umb-control-group">
+                <label class="control-label">
+                    IP Address
+                    <small></small>
+                </label>
+                <br>
+                <input class="block ip" no-dirty-check type="text" ng-model="vm.state.search.filters.IpAddress" ng-change="vm.fn.search(1, true)" />
+            </div>
+        </div>
+
+        <perplex-paged-listview
+            items="vm.state.search.results.Items"
+            paging="vm.state.search.results.Paging"
+            goto-page="vm.fn.gotoPage"
+            columns="vm.state.columns"
+        ></perplex-paged-listview>
+    </div>
+</div>

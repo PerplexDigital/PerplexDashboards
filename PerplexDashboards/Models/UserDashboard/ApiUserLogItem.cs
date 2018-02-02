@@ -53,7 +53,7 @@ namespace PerplexDashboards.Models.UserDashboard
             return userService.GetUserById(userId)?.Name ?? noUser;
         }
 
-        public static SearchResults<ApiUserLogItem> Search(Filters filters, DatabaseContext databaseContext = null)
+        public static SearchResults<ApiUserLogItem> Search(UserFilters filters, DatabaseContext databaseContext = null)
         {          
             List<ApiUserLogItem> items = UserLogItem.GetAll(databaseContext, filters)              
                 .Select(i => new ApiUserLogItem(i))                             

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using Umbraco.Core;
 using Umbraco.Core.Persistence;
@@ -55,7 +56,7 @@ namespace PerplexDashboards.Models.MemberDashboard
             {
                 MemberLogItem item = new MemberLogItem
                 {
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     IP = ip ?? request?.UserHostAddress,
                     Url = url ?? request?.RawUrl,
                     Action = action,
@@ -85,18 +86,52 @@ namespace PerplexDashboards.Models.MemberDashboard
             return logItem?.Date;
         }
 
-        /// <summary>
-        /// Levert alle entries uit de audit log op
-        /// </summary>
-        /// <returns></returns>
-        public static IEnumerable<MemberLogItem> GetAll(DatabaseContext databaseContext = null)
+        public static IList<MemberLogItem> GetAll(DatabaseContext databaseContext = null, MemberFilters filters = null)
         {
             DatabaseContext dbCtx = databaseContext ?? ApplicationContext.Current.DatabaseContext;
-            return dbCtx.Database.Fetch<MemberLogItem>(
-                new Sql()
+
+            Sql sql = new Sql()
                 .Select("*")
-                .From<MemberLogItem>(dbCtx.SqlSyntax));
-        }      
+                .From<MemberLogItem>(dbCtx.SqlSyntax);
+
+            if (filters != null)
+            {
+                Action<Expression<Func<MemberLogItem, bool>>> addWhere =
+                    expr => sql = sql.Where(expr, dbCtx.SqlSyntax);
+
+                if (filters.From != null)
+                {
+                    addWhere(i => i.Date >= filters.From.Value.Date);
+                }
+
+                if (filters.To != null)
+                {
+                    DateTime to = filters.To.Value.Date.AddDays(1);
+                    addWhere(i => i.Date < to);
+                }
+
+                if (filters.Action != null)
+                {
+                    string action = filters.Action.ToString();
+                    addWhere(i => action == i.AuditAction);
+                }
+
+                if (filters.MemberId != null)
+                {
+                    addWhere(i => i.UserId == filters.MemberId);
+                }
+
+                if (!string.IsNullOrEmpty(filters.IpAddress))
+                {
+                    // TODO: Broken
+                    // sql = sql.Where($"{nameof(IP)} LIKE '%' + @0 + '%'", new[] { filters.IpAddress });
+                }
+            }
+
+            sql = sql.OrderByDescending<MemberLogItem>(item => item.Date, dbCtx.SqlSyntax);
+
+            return dbCtx.Database.Fetch<MemberLogItem>(sql);
+        }
 
         public string GetDescription(MemberAuditAction? action)
         {

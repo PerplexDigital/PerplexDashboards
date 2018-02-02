@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PerplexDashboards.Models.UserDashboard
+namespace PerplexDashboards.Models
 {
     /// <summary>
     /// De filters die in Umbraco kunnen worden ingesteld en naar de API controller worden gestuurd

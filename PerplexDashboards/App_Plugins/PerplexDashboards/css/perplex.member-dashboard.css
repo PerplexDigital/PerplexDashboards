@@ -1,0 +1,39 @@
+﻿.perplex-activity-log .umb-control-group {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0 !important;
+  border-bottom: none;
+}
+.perplex-activity-log .umb-control-group .controls {
+  margin-left: 0;
+}
+.perplex-activity-log .umb-control-group .umb-datepicker .datepicker {
+  margin: 0;
+}
+.perplex-activity-log .umb-control-group .umb-datepicker .datepicker .datepickerinput {
+  width: 120px;
+}
+.perplex-activity-log .umb-control-group .umb-datepicker p {
+  margin-top: 5px;
+}
+.perplex-activity-log .filter-container {
+  display: flex;
+}
+.perplex-activity-log .filter-container > * {
+  margin-left: 2em;
+}
+.perplex-activity-log .filter-container > *:first-child {
+  margin-left: 0;
+}
+.perplex-activity-log .filter-container select {
+  margin: 0;
+}
+.perplex-activity-log .filter-container label {
+  width: auto;
+}
+.perplex-activity-log .filter-container .block {
+  display: block;
+}
+.perplex-activity-log .filter-container .ip {
+  width: 140px;
+}

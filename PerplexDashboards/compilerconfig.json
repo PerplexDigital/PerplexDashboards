@@ -10,5 +10,9 @@
   {
     "outputFile": "App_Plugins/PerplexDashboards/css/perplex.user-dashboard.css",
     "inputFile": "App_Plugins/PerplexDashboards/css/perplex.user-dashboard.less"
+  },
+  {
+    "outputFile": "App_Plugins/PerplexDashboards/css/perplex.member-dashboard.css",
+    "inputFile": "App_Plugins/PerplexDashboards/css/perplex.member-dashboard.less"
   }
 ]

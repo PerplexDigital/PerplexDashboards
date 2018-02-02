@@ -1,40 +1,56 @@
-﻿angular.module("umbraco").service("PerplexMembersDashboard.ApiService", [
+﻿angular.module("umbraco").service("Perplex.MemberDashboard.Api", [
     "$http",
     "umbRequestHelper",
     function($http, umbRequestHelper) {
-        var API_ROOT = "/umbraco/backoffice/api/MembersDashboardApi";
+        var API_ROOT = "/umbraco/backoffice/api/MemberDashboardApi/";
+
+        this.GetActivityLogViewModel = function(memberGuid) {
+            return get("GetActivityLogViewModel?memberGuid=" + memberGuid);
+        };
+
+        this.SearchActivityLog = function(filters, timeout) {
+            return post("SearchActivityLog", filters, timeout);
+        };
 
         this.getLockedMembers = function() {
-            return $http.get(API_ROOT + "/GetLockedMembers");
+            return $http.get(API_ROOT + "GetLockedMembers");
         };
 
         this.getLockedMembersListView = function(parentId, options) {
-            return getUmbracoListViewPromise(API_ROOT + "/GetLockedMembersListView", parentId, options);
+            return getUmbracoListViewPromise(API_ROOT + "GetLockedMembersListView", parentId, options);
         };
 
         this.unlockMember = function(memberId) {
-            return $http.get(API_ROOT + "/UnlockMember?memberId=" + memberId);
+            return $http.get(API_ROOT + "UnlockMember?memberId=" + memberId);
         };
 
         this.getUnapprovedMembersListView = function(parentId, options) {
-            return getUmbracoListViewPromise(API_ROOT + "/GetUnapprovedMembersListView", parentId, options);
+            return getUmbracoListViewPromise(API_ROOT + "GetUnapprovedMembersListView", parentId, options);
         };
 
         this.approveMember = function(memberId) {
-            return $http.get(API_ROOT + "/ApproveMember?memberId=" + memberId);
+            return $http.get(API_ROOT + "ApproveMember?memberId=" + memberId);
         };
 
         this.deleteMember = function(memberId) {
-            return $http.post(API_ROOT + "/DeleteMember?memberId=" + memberId);
+            return $http.post(API_ROOT + "DeleteMember?memberId=" + memberId);
         };
 
         this.getMembersLogListView = function(parentId, options) {
-            return getUmbracoListViewPromise(API_ROOT + "/GetMembersLogListView", parentId, options);
+            return getUmbracoListViewPromise(API_ROOT + "GetMembersLogListView", parentId, options);
         };
 
         this.GetPasswordPolicy = function() {
-            return $http.get(API_ROOT + "/GetPasswordPolicy");
+            return $http.get(API_ROOT + "GetPasswordPolicy");
         };
+
+        function get(name, params) {
+            return $http.get(API_ROOT + name);
+        }
+
+        function post(name, args, timeout) {
+            return $http.post(API_ROOT + name, args, { timeout: timeout && timeout.promise });
+        }
 
         function getUmbracoListViewPromise(url, parentId, options) {
             var defaults = {

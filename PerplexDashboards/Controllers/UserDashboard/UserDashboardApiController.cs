@@ -1,4 +1,5 @@
-﻿using PerplexDashboards.Models.UserDashboard;
+﻿using PerplexDashboards.Models;
+using PerplexDashboards.Models.UserDashboard;
 using System.Web.Http;
 using System.Web.Security;
 using Umbraco.Core;
@@ -20,7 +21,7 @@ namespace PerplexDashboards.Controllers.UserDashboard
         }        
 
         [HttpPost]
-        public SearchResults<ApiUserLogItem> Search(Filters filters)
+        public SearchResults<ApiUserLogItem> Search(UserFilters filters)
         {          
             return ApiUserLogItem.Search(filters, DbContext);
         }

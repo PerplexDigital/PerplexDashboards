@@ -1,24 +1,24 @@
-<div class="perplex-user-dashboard" ng-controller="PerplexUserDashboardController as vm"
+<div class="perplex-user-dashboard" ng-controller="Perplex.UserDashboard.Controller as vm"
     perplex-on-tab-focus="{ once: vm.fn.init }">
 
     <perplex-loader text="Loading ..." show="vm.state.isLoading"></perplex-loader>
 
     <div ng-if="!vm.state.isLoading">
-        <div class="filter-container" ng-if="!vm.state.isLoading">        
-            <perplex-render-property             
+        <div class="filter-container" ng-if="!vm.state.isLoading">
+            <perplex-render-property
                 label="'From'"
-                get-value="vm.fn.getValue('From')" 
-                set-value="vm.fn.setValue('From')" 
+                get-value="vm.fn.getValue('From')"
+                set-value="vm.fn.setValue('From')"
                 on-change="vm.fn.onChange"
                 alias="'Umbraco.Date'"></perplex-render-property>
-            
-            <perplex-render-property             
+
+            <perplex-render-property
                 label="'To'"
-                get-value="vm.fn.getValue('To')" 
-                set-value="vm.fn.setValue('To')" 
+                get-value="vm.fn.getValue('To')"
+                set-value="vm.fn.setValue('To')"
                 on-change="vm.fn.onChange"
                 alias="'Umbraco.Date'"></perplex-render-property>
-    
+
             <div class="umb-control-group">
                 <label class="control-label">
                     User
@@ -26,9 +26,9 @@
                 </label>
                 <select class="block" no-dirty-check ng-model="vm.state.search.filters.UserId" ng-change="vm.fn.search(1)" ng-options="user.Id as user.Name for user in vm.state.users">
                         <option value="">All users</option>
-                </select>    
+                </select>
             </div>
-    
+
             <div class="umb-control-group">
                 <label class="control-label">
                     Event
@@ -36,9 +36,9 @@
                 </label>
                 <select class="block" no-dirty-check ng-model="vm.state.search.filters.Event" ng-change="vm.fn.search(1)" ng-options="event.Key as event.Value for event in vm.state.events">
                     <option value="">All events</option>
-                </select>  
+                </select>
             </div>
-    
+
             <div class="umb-control-group">
                 <label class="control-label">
                     IP Address
@@ -48,11 +48,11 @@
             </div>
         </div>
 
-        <perplex-paged-listview                    
+        <perplex-paged-listview
             items="vm.state.search.results.Items"
             paging="vm.state.search.results.Paging"
             goto-page="vm.fn.gotoPage"
             columns="vm.state.columns"
         ></perplex-paged-listview>
     </div>
-</div>    
+</div>

@@ -10,14 +10,14 @@ namespace PerplexDashboards.Models.UserDashboard
 {
     public class UserDashboardViewModel
     {
-        public Filters Filters { get; }
+        public UserFilters Filters { get; }
         public SearchResults<ApiUserLogItem> SearchResults { get; }
         public IEnumerable<ApiUser> Users { get; }
         public IList<KeyValuePair<int, string>> Events { get; }
 
         public UserDashboardViewModel(IUserService userService, DatabaseContext databaseContext = null)
         {
-            Filters = new Filters
+            Filters = new UserFilters
             {
                 From = DateTime.Today.AddMonths(-1),
                 To = DateTime.Today,

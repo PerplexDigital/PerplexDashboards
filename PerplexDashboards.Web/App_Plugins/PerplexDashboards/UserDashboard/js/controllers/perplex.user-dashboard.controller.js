@@ -1,10 +1,10 @@
-angular.module("umbraco").controller("PerplexUserDashboardController", [
-    "perplexUserDashboardApi",
+angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
+    "Perplex.UserDashboard.Api",
     "notificationsService",
     "$location",
     "$timeout",
     "$scope",
-    function(perplexUserDashboardApi, notificationsService, $location, $timeout, $scope) {
+    function(userDashboardApi, notificationsService, $location, $timeout, $scope) {
         var vm = this;
 
         var state = (vm.state = {
@@ -44,7 +44,7 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                     }
                 },
                 {
-                    name: "Timestamp",
+                    name: "Date & Time",
                     property: "Timestamp"
                 },
 
@@ -84,7 +84,7 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
             init: function() {
                 state.isLoading = true;
 
-                perplexUserDashboardApi
+                userDashboardApi
                     .GetViewModel()
                     .then(function(response) {
                         var viewModel = response.data;
@@ -127,7 +127,7 @@ angular.module("umbraco").controller("PerplexUserDashboardController", [
                     state.search.filters.Page = page;
                 }
 
-                perplexUserDashboardApi
+                userDashboardApi
                     .Search(state.search.filters)
                     .then(function(response) {
                         state.search.results = response.data;

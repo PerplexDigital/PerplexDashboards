@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PerplexDashboards.Models.UserDashboard
+namespace PerplexDashboards.Models
 {   
     public class Paging
     {

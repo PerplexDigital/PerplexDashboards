@@ -1,5 +1,5 @@
 angular.module("umbraco").controller("Perplex.MemberPasswordPolicy.Controller", [
-    "PerplexMembersDashboard.ApiService",
+    "Perplex.MemberDashboard.Api",
     function(memberDashboardApi) {
         var vm = this;
 

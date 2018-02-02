@@ -11,10 +11,12 @@ using System.Net;
 using PerplexDashboards.Models.MemberDashboard;
 using System.Web.Security;
 using Umbraco.Web.Security.Providers;
+using PerplexDashboards.Models.MemberDashboard.ActivityLog;
+using PerplexDashboards.Models;
 
 namespace PerplexDashboards.Controllers.MemberDashboard
 {
-    public class MembersDashboardApiController : UmbracoAuthorizedApiController
+    public class MemberDashboardApiController : UmbracoAuthorizedApiController
     {
         [HttpGet]
         public PagedResult<LockedMembersListViewResponse> GetLockedMembersListView([FromUri]ListViewRequest request)
@@ -286,6 +288,22 @@ namespace PerplexDashboards.Controllers.MemberDashboard
             }
 
             return true;
+        }
+
+        // NEW ->
+
+        private DatabaseContext DbContext => ApplicationContext.DatabaseContext;
+
+        [HttpGet]
+        public MemberActivityLogViewModel GetActivityLogViewModel(Guid? memberGuid)
+        {
+            return new MemberActivityLogViewModel(Services.MemberService, DbContext, memberGuid);
+        }
+
+        [HttpPost]
+        public SearchResults<ApiMemberLogItem> SearchActivityLog(MemberFilters filters)
+        {
+            return ApiMemberLogItem.Search(filters, DbContext);
         }
 
         [HttpGet]

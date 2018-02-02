@@ -15,7 +15,7 @@
     "$q",
     "mediaResource",
     "listViewHelper",
-    "PerplexMembersDashboard.ApiService",
+    "Perplex.MemberDashboard.Api",
     function listViewController(
         $rootScope,
         $scope,

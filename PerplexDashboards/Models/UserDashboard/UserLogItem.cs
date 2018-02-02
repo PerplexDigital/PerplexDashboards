@@ -66,7 +66,7 @@ namespace PerplexDashboards.Models.UserDashboard
             databaseContext.Database.Insert(this);            
         }
 
-        public static IList<UserLogItem> GetAll(DatabaseContext databaseContext = null, Filters filters = null)
+        public static IList<UserLogItem> GetAll(DatabaseContext databaseContext = null, UserFilters filters = null)
         {
             DatabaseContext dbCtx = databaseContext ?? ApplicationContext.Current.DatabaseContext;
 
@@ -92,7 +92,12 @@ namespace PerplexDashboards.Models.UserDashboard
 
                 if(filters.Event != null)
                 {
-                    addWhere(i => (int)filters.Event == i.AuditEvent);
+                    addWhere(i => i.AuditEvent == (int)filters.Event);
+                }
+
+                if(filters.UserId != null)
+                {
+                    addWhere(i => i.UserId == filters.UserId || i.AffectedUserId == filters.UserId);
                 }
 
                 if (!string.IsNullOrEmpty(filters.IpAddress))

@@ -1,4 +1,4 @@
-angular.module("umbraco").service("perplexUserDashboardApi", [
+angular.module("umbraco").service("Perplex.UserDashboard.Api", [
     "$http",
     function($http) {
         var API_ROOT = (this.API_ROOT = "/umbraco/backoffice/api/userdashboardapi/");
