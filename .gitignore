@@ -315,4 +315,4 @@ __pycache__/
 */[Uu]mbraco_[Cc]lient/
 
 .svn/
-# connectionStrings.config
+connectionStrings.config
