@@ -13,6 +13,7 @@ using Umbraco.Web.Security.Providers;
 using System.Web.Security;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using PerplexDashboards.Models.MemberDashboard.AccessLog;
 
 namespace PerplexDashboards.Code
 {
@@ -52,7 +53,8 @@ namespace PerplexDashboards.Code
         private void CreateDatabaseTablesIfNeeded(DatabaseContext dbCtx, ILogger logger = null)
         {
             DatabaseHelper.CreateDatabaseTableIfNeeded<UserLogItem>(dbCtx, UserLogItem.TableName, logger);
-            DatabaseHelper.CreateDatabaseTableIfNeeded<MemberLogItem>(dbCtx, MemberLogItem.TableName, logger);            
+            DatabaseHelper.CreateDatabaseTableIfNeeded<MemberLogItem>(dbCtx, MemberLogItem.TableName, logger);
+            DatabaseHelper.CreateDatabaseTableIfNeeded<MemberAccessLogItem>(dbCtx, MemberAccessLogItem.TableName, logger);
         }
        
         private void UsersMembershipProviderEventHandler(EventArgs e, DatabaseContext dbCtx)

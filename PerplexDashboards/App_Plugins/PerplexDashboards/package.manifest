@@ -29,9 +29,19 @@
     },
     {
       "alias": "PerplexDashboards.MemberDashboard.ActivityLog",
-      "name": "PerplexDashboards - Activity Log",
+      "name": "PerplexDashboards - Member Dashboard - Activity Log",
       "editor": {
         "view": "~/App_Plugins/PerplexDashboards/MemberDashboard/html/perplex.member-dashboard.activity-log.html",
+        "hideLabel": true,
+        "valueType": "JSON"
+      }
+    },
+
+    {
+      "alias": "PerplexDashboards.MemberDashboard.AccessLog",
+      "name": "PerplexDashboards - Member Dashboard - Access Log",
+      "editor": {
+        "view": "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/AccessLog/perplex.member-dashboard.access-log.html",
         "hideLabel": true,
         "valueType": "JSON"
       }
@@ -51,6 +61,7 @@
     "~/App_Plugins/PerplexDashboards/MemberPasswordPolicy/perplex.member-password-policy.controller.js",
 
     "~/App_Plugins/PerplexDashboards/MemberDashboard/js/controllers/perplex.member-dashboard.activity-log.controller.js",
+    "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/AccessLog/perplex.member-dashboard.access-log.controller.js",
     "~/App_Plugins/PerplexDashboards/MemberDashboard/js/services/perplex.member-dashboard.api.service.js",
     "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/LockedMembersListView/LockedMembersListView.controller.js",
     "~/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/UnapprovedMembersListView/UnapprovedMembersListView.controller.js",

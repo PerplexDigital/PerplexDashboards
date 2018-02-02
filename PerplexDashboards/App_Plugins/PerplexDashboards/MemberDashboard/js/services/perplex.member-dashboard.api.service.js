@@ -12,6 +12,18 @@
             return post("SearchActivityLog", filters, timeout);
         };
 
+        this.GetAccessLogViewModel = function(memberId) {
+            return get("GetAccessLogViewModel?memberId=" + memberId);
+        };
+
+        this.SearchAccessLog = function(filters, timeout) {
+            return post("SearchAccessLog", filters, timeout);
+        };
+
+        this.LogMemberView = function(memberId) {
+            return post("LogMemberView?memberId=" + memberId);
+        };
+
         this.getLockedMembers = function() {
             return $http.get(API_ROOT + "GetLockedMembers");
         };

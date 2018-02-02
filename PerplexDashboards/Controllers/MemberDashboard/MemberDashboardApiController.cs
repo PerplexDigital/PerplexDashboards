@@ -13,6 +13,8 @@ using System.Web.Security;
 using Umbraco.Web.Security.Providers;
 using PerplexDashboards.Models.MemberDashboard.ActivityLog;
 using PerplexDashboards.Models;
+using PerplexDashboards.Models.MemberDashboard.AccessLog;
+using System.Web;
 
 namespace PerplexDashboards.Controllers.MemberDashboard
 {
@@ -307,6 +309,18 @@ namespace PerplexDashboards.Controllers.MemberDashboard
         }
 
         [HttpGet]
+        public MemberAccessLogViewModel GetAccessLogViewModel(Guid? memberId)
+        {
+            return new MemberAccessLogViewModel(Services.MemberService, Services.UserService, DbContext, memberId);
+        }
+
+        [HttpPost]
+        public SearchResults<ApiMemberAccessLogItem> SearchAccessLog(MemberAccessLogFilters filters)
+        {
+            return ApiMemberAccessLogItem.Search(filters, DbContext, Services.MemberService, Services.UserService);
+        }
+
+        [HttpGet]
         public MemberPasswordPolicy GetPasswordPolicy()
         {
             MembersMembershipProvider membersMembershipProvider = Membership.Providers["UmbracoMembershipProvider"] as MembersMembershipProvider;
@@ -317,6 +331,19 @@ namespace PerplexDashboards.Controllers.MemberDashboard
             }
 
             return new MemberPasswordPolicy(membersMembershipProvider);            
+        }
+
+        [HttpPost]
+        public HttpResponseMessage LogMemberView(Guid? memberId)
+        {
+            if(memberId == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "memberId is required");
+            }
+
+            MemberAccessLogItem.Log(memberId.Value, Security.CurrentUser.Id, Code.MemberAccessAction.View, HttpContext.Current.Request.UserHostAddress, DatabaseContext);
+
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

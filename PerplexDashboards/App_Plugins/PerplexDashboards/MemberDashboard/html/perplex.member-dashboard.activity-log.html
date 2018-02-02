@@ -46,7 +46,11 @@
                     <small></small>
                 </label>
                 <br>
-                <input class="block ip" no-dirty-check type="text" ng-model="vm.state.search.filters.IpAddress" ng-change="vm.fn.search(1, true)" />
+                <input class="block ip" 
+                    no-dirty-check type="text" 
+                    placeholder="filter IP addresses"
+                    ng-model="vm.state.search.filters.IpAddress" 
+                    ng-change="vm.fn.search(1, true)" />
             </div>
         </div>
 

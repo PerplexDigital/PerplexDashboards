@@ -3,10 +3,10 @@ angular.module("umbraco").directive("perplexPagedListview", [
         return {
             scope: {
                 items: "=",
-                paging: "=",
-                commands: "=",
-                columns: "=",
-                gotoPage: "&"
+                paging: "=?",
+                commands: "=?",
+                columns: "=?",
+                gotoPage: "&?"
             },
             restrict: "E",
             replace: true,

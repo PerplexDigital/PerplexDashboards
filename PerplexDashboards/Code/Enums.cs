@@ -83,4 +83,10 @@ namespace PerplexDashboards.Code
         ActivatedByAdministrator,
         Register,
     }
+
+    public enum MemberAccessAction
+    {
+        View,
+        Edit,
+    }
 }

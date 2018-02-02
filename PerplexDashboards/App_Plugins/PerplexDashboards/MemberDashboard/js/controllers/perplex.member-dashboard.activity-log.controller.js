@@ -45,13 +45,12 @@ angular.module("umbraco").controller("Perplex.MemberDashboard.ActivityLog.Contro
                     }
                 },
                 {
-                    name: "Date & Time",
-                    property: "Timestamp"
-                },
-
-                {
                     name: "Action",
                     property: "Action"
+                },
+                {
+                    name: "Date & Time",
+                    property: "Timestamp"
                 },
 
                 {
@@ -76,16 +75,20 @@ angular.module("umbraco").controller("Perplex.MemberDashboard.ActivityLog.Contro
                 // When we are on a member page,
                 // immediately set the MemberId in the filters to the current member
                 // and do not show the filter in the UI
-                if (
-                    $routeParams.section === "member" &&
-                    $routeParams.tree === "member" &&
-                    $routeParams.id != null &&
-                    $routeParams.id.length === 36
-                ) {
+                if (fn.isMemberPage()) {
                     memberGuid = $routeParams.id;
                 }
 
                 fn.getViewModel(memberGuid);
+            },
+
+            isMemberPage: function() {
+                return (
+                    $routeParams.section === "member" &&
+                    $routeParams.tree === "member" &&
+                    $routeParams.id != null &&
+                    $routeParams.id.length === 36
+                );
             },
 
             getViewModel: function(memberGuid) {
@@ -195,5 +198,10 @@ angular.module("umbraco").controller("Perplex.MemberDashboard.ActivityLog.Contro
                 fn.search(1);
             }
         });
+
+        // On member page -> remove Member column, as it's obviously always the same (= current member)
+        if (fn.isMemberPage()) {
+            state.columns = state.columns.slice(1);
+        }
     }
 ]);

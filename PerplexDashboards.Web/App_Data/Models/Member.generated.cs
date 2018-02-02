@@ -46,6 +46,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Access Log
+		///</summary>
+		[ImplementPropertyType("accessLog")]
+		public Newtonsoft.Json.Linq.JToken AccessLog
+		{
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("accessLog"); }
+		}
+
+		///<summary>
 		/// Activity Log
 		///</summary>
 		[ImplementPropertyType("activityLog")]

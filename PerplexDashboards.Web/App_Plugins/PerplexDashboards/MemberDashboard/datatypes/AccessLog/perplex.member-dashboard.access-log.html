@@ -1,4 +1,4 @@
-<div class="perplex-user-dashboard" ng-controller="Perplex.UserDashboard.Controller as vm"
+<div class="perplex-activity-log" ng-controller="Perplex.MemberDashboard.AccessLog.Controller as vm"
     perplex-on-tab-focus="{ once: vm.fn.init }">
 
     <perplex-loader text="Loading ..." show="vm.state.isLoading"></perplex-loader>
@@ -19,23 +19,35 @@
                 on-change="vm.fn.onChange"
                 alias="'Umbraco.Date'"></perplex-render-property>
 
-            <div class="umb-control-group">
+            <div class="umb-control-group" ng-if="vm.state.members.length > 0">
                 <label class="control-label">
-                    User
+                    Member
                     <small></small>
                 </label>
-                <select class="block" no-dirty-check ng-model="vm.state.search.filters.UserId" ng-change="vm.fn.search(1)" ng-options="user.Id as user.Name for user in vm.state.users">
-                        <option value="">All users</option>
+                <select class="block" no-dirty-check ng-model="vm.state.search.filters.MemberId" ng-change="vm.fn.search(1)" ng-options="member.Id as member.Name for member in vm.state.members">
+                        <option value="">All members</option>
                 </select>
             </div>
 
             <div class="umb-control-group">
                 <label class="control-label">
-                    Event
+                    User
                     <small></small>
                 </label>
-                <select class="block" no-dirty-check ng-model="vm.state.search.filters.Event" ng-change="vm.fn.search(1)" ng-options="event.Key as event.Value for event in vm.state.events">
-                    <option value="">All events</option>
+                <br>
+                <select class="block" no-dirty-check ng-model="vm.state.search.filters.UserId" ng-change="vm.fn.search(1)" ng-options="user.Id as user.Name for user in vm.state.users">
+                    <option value="">All users</option>
+                </select>
+            </div>
+
+            <div class="umb-control-group">
+                <label class="control-label">
+                    Action
+                    <small></small>
+                </label>
+                <br>
+                <select class="block" no-dirty-check ng-model="vm.state.search.filters.Action" ng-change="vm.fn.search(1)" ng-options="action.Key as action.Value for action in vm.state.actions">
+                    <option value="">All actions</option>
                 </select>
             </div>
 
@@ -44,8 +56,9 @@
                     IP Address
                     <small></small>
                 </label>
-                <input class="block ip" no-dirty-check 
-                    type="text" 
+                <br>
+                <input class="block ip" 
+                    no-dirty-check type="text" 
                     placeholder="filter IP addresses"
                     ng-model="vm.state.search.filters.IpAddress" 
                     ng-change="vm.fn.search(1, true)" />

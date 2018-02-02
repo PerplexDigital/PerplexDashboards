@@ -43,14 +43,15 @@ angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
                         $location.url("/users/users/user/" + item.UserId + "?subview=users");
                     }
                 },
-                {
-                    name: "Date & Time",
-                    property: "Timestamp"
-                },
 
                 {
                     name: "Event",
                     property: "Event"
+                },
+
+                {
+                    name: "Date & Time",
+                    property: "Timestamp"
                 },
 
                 {

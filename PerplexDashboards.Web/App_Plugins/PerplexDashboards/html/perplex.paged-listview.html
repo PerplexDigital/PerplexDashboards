@@ -10,7 +10,7 @@
     <table class="c-table__item">
         <thead>
             <tr class="c-table__row c-table__row--head">
-                <th class="c-table__cell c-table_-cell--head" ng-repeat="column in columns" ng-bind="column.name"></th>
+                <th class="c-table__cell c-table_-cell--head" ng-repeat="column in columns track by column.property" ng-bind="column.name"></th>
             </tr>
         </thead>
     
@@ -18,7 +18,7 @@
             <tr class="c-table__row" 
                 ng-click="selectItem(item)" 
                 ng-class="{ 'c-table__row--selected' : isSelected(item), 'c-table__row--selectable': commands.length > 0}">
-                <td class="c-table__cell" ng-repeat="column in columns">
+                <td class="c-table__cell" ng-repeat="column in columns track by column.property">
                     <a ng-if="column.onClick" href="" prevent-default ng-click="column.onClick(item)" ng-bind="item[column.property]"></a>
                     <span ng-if="!column.onClick" ng-bind="item[column.property]"></span>
                 </td>                

@@ -217,6 +217,10 @@
     <Compile Include="Code\Enums.cs" />
     <Compile Include="Code\PerplexDashboardsEventHandler.cs" />
     <Compile Include="Code\Extensions.cs" />
+    <Compile Include="Models\MemberDashboard\AccessLog\ApiMemberAccessLogItem.cs" />
+    <Compile Include="Models\MemberDashboard\AccessLog\MemberAccessLogViewModel.cs" />
+    <Compile Include="Models\MemberDashboard\AccessLog\MemberAccessLogFilters.cs" />
+    <Compile Include="Models\MemberDashboard\AccessLog\MemberAccessLogItem.cs" />
     <Compile Include="Models\UserDashboard\UserDashboardSettings.cs" />
     <Compile Include="Controllers\MemberDashboard\MemberDashboardApiController.cs" />
     <Compile Include="Controllers\UserDashboard\UserDashboardApiController.cs" />
@@ -225,7 +229,7 @@
     <Compile Include="Models\MemberDashboard\ApiMember.cs" />
     <Compile Include="Models\MemberDashboard\MemberPasswordPolicy.cs" />
     <Compile Include="Models\MemberDashboard\MemberFilters.cs" />
-    <Compile Include="Models\MemberDashboard\ActivityLog\ActivityLogViewModel.cs" />
+    <Compile Include="Models\MemberDashboard\ActivityLog\MemberActivityLogViewModel.cs" />
     <Compile Include="Models\PasswordPolicyBase.cs" />
     <Compile Include="Models\MemberDashboard\BaseListViewResponse.cs" />
     <Compile Include="Models\MemberDashboard\BaseMemberAccount.cs" />
@@ -279,6 +283,8 @@
     </Content>
     <Content Include="App_Plugins\PerplexDashboards\html\perplex.paged-listview.html" />
     <Content Include="App_Plugins\PerplexDashboards\html\perplex.render-property.html" />
+    <Content Include="App_Plugins\PerplexDashboards\MemberDashboard\datatypes\AccessLog\perplex.member-dashboard.access-log.controller.js" />
+    <Content Include="App_Plugins\PerplexDashboards\MemberDashboard\datatypes\AccessLog\perplex.member-dashboard.access-log.html" />
     <Content Include="App_Plugins\PerplexDashboards\MemberDashboard\html\perplex.member-dashboard.activity-log.html" />
     <Content Include="App_Plugins\PerplexDashboards\MemberDashboard\js\controllers\perplex.member-dashboard.activity-log.controller.js" />
     <Content Include="App_Plugins\PerplexDashboards\Perplex.Loader\css\perplex.loader.css" />

@@ -1,24 +1,26 @@
-angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
-    "Perplex.UserDashboard.Api",
+angular.module("umbraco").controller("Perplex.MemberDashboard.AccessLog.Controller", [
+    "Perplex.MemberDashboard.Api",
     "notificationsService",
     "$location",
     "$timeout",
     "$scope",
-    function(userDashboardApi, notificationsService, $location, $timeout, $scope) {
+    "$routeParams",
+    function(memberDashboardApi, notificationsService, $location, $timeout, $scope, $routeParams) {
         var vm = this;
 
         var state = (vm.state = {
-            // List of { Key: ..., Value: ... }, with Key being the integer value of the AuditEvent enum and Value being the AuditEvent string representation
-            events: [],
+            // List of { Key: ..., Value: ... }, with Key being the integer value of the MemberAuditAction enum and Value being the MemberAuditAction string representation
+            actions: [],
 
             search: {
                 filters: {
                     Page: 1,
                     PageSize: 0,
+                    MemberId: null,
                     UserId: null,
                     From: null,
                     To: null,
-                    Event: null
+                    Action: null
                 },
 
                 results: {
@@ -33,22 +35,27 @@ angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
                 }
             },
 
-            users: [],
+            members: [],
 
             columns: [
                 {
+                    name: "Member",
+                    property: "MemberName",
+                    onClick: function(item) {
+                        $location.url("/member/member/edit/" + item.MemberId);
+                    }
+                },
+                {
                     name: "User",
-                    property: "User",
+                    property: "UserName",
                     onClick: function(item) {
                         $location.url("/users/users/user/" + item.UserId + "?subview=users");
                     }
                 },
-
                 {
-                    name: "Event",
-                    property: "Event"
+                    name: "Action",
+                    property: "Action"
                 },
-
                 {
                     name: "Date & Time",
                     property: "Timestamp"
@@ -57,18 +64,6 @@ angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
                 {
                     name: "IP Address",
                     property: "IpAddress"
-                },
-
-                {
-                    name: "Affected User",
-                    property: "AffectedUser",
-                    onClick: function(item) {
-                        if (item.AffectedUserId == -1) {
-                            return;
-                        }
-
-                        $location.url("/users/users/user/" + item.AffectedUserId + "?subview=users");
-                    }
                 }
             ],
 
@@ -83,10 +78,28 @@ angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
 
         var fn = (vm.fn = {
             init: function() {
+                var memberId = fn.isMemberPage() ? $routeParams.id : null;
+                fn.getViewModel(memberId);
+            },
+
+            isMemberPage: function() {
+                return (
+                    $routeParams.section === "member" &&
+                    $routeParams.tree === "member" &&
+                    $routeParams.id != null &&
+                    $routeParams.id.length === 36
+                );
+            },
+
+            logView: function(memberId) {
+                memberDashboardApi.LogMemberView(memberId);
+            },
+
+            getViewModel: function(memberId) {
                 state.isLoading = true;
 
-                userDashboardApi
-                    .GetViewModel()
+                memberDashboardApi
+                    .GetAccessLogViewModel(memberId)
                     .then(function(response) {
                         var viewModel = response.data;
                         if (viewModel == null) {
@@ -96,7 +109,8 @@ angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
                         state.search.filters = viewModel.Filters;
                         state.search.results = viewModel.SearchResults;
 
-                        state.events = viewModel.Events;
+                        state.actions = viewModel.Actions;
+                        state.members = viewModel.Members;
                         state.users = viewModel.Users;
                     })
                     .always(function() {
@@ -128,8 +142,8 @@ angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
                     state.search.filters.Page = page;
                 }
 
-                userDashboardApi
-                    .Search(state.search.filters)
+                memberDashboardApi
+                    .SearchAccessLog(state.search.filters)
                     .then(function(response) {
                         state.search.results = response.data;
                     }, fn.onError)
@@ -189,5 +203,13 @@ angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
                 fn.search(1);
             }
         });
+
+        // Log view when we are on a member page now
+        if (fn.isMemberPage()) {
+            fn.logView($routeParams.id);
+
+            // Also remove the "Member"-column
+            state.columns = state.columns.slice(1);
+        }
     }
 ]);
