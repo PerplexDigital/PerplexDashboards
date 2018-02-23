@@ -37,7 +37,7 @@ namespace PerplexDashboards.Models.UserDashboard
                 });
 
             Events = Enums.Values<AuditEvent>()
-                .ToDictionary(ae => (int)ae, ae => ae.ToString())
+                .ToDictionary(ae => (int)ae, ae => ae.GetDisplayName())
                 .ToList();
         }
     }

@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data;
 using Umbraco.Core.Services;
 using Umbraco.Core.Persistence;
+using System.Text.RegularExpressions;
+using PerplexDashboards.Code;
 
 namespace PerplexDashboards.Models.UserDashboard
 {
@@ -17,7 +19,7 @@ namespace PerplexDashboards.Models.UserDashboard
         public int UserId { get; set; }
         public string User { get; set; }
         public int AffectedUserId { get; set; }
-        public string AffectedUser { get; set; }        
+        public string AffectedUser { get; set; }                
         public string Event { get; set; }
         public string IpAddress { get; set; }
         public string Timestamp { get; set; }
@@ -31,10 +33,13 @@ namespace PerplexDashboards.Models.UserDashboard
             }
 
             UserId = item.UserId;
-            User = GetUsername(UserId, us);
+            User = string.IsNullOrEmpty(item.Username) 
+                ? GetUsername(UserId, us)
+                : item.Username;
+
             AffectedUserId = item.AffectedUserId;
             AffectedUser = GetUsername(AffectedUserId, us);
-            Event = item.Event.ToString();
+            Event = item.Event.GetDisplayName();
             IpAddress = item.IpAddress;
 
             DateTime localTime = item.Timestamp.ToLocalTime();

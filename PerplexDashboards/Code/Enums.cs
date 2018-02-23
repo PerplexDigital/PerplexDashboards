@@ -86,7 +86,6 @@ namespace PerplexDashboards.Code
 
     public enum MemberAccessAction
     {
-        View,
-        Edit,
+        View     
     }
 }

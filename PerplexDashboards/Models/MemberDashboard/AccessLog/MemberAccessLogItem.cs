@@ -44,7 +44,7 @@ namespace PerplexDashboards.Models.MemberDashboard.AccessLog
                 UserId = userId,
                 Timestamp = DateTime.UtcNow,
                 IpAddress = ipAddress ?? HttpContext.Current?.Request?.UserHostAddress,
-                AccessAction = action             ,
+                AccessAction = action,
             };
 
             DatabaseContext dbCtx = databaseContext ?? ApplicationContext.Current.DatabaseContext;

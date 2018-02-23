@@ -10,6 +10,7 @@ using System.Data;
 using Umbraco.Core.Services;
 using Umbraco.Core.Persistence;
 using Umbraco.Core.Models;
+using PerplexDashboards.Code;
 
 namespace PerplexDashboards.Models.MemberDashboard
 {
@@ -42,7 +43,7 @@ namespace PerplexDashboards.Models.MemberDashboard
                 MemberGuid = member.Key;
             }
 
-            Action = item.AuditAction;
+            Action = item.Action.GetDisplayName();
             IpAddress = item.IP;
 
             DateTime localTime = item.Date.ToLocalTime();

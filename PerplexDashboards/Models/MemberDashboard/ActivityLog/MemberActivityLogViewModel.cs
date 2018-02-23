@@ -50,7 +50,7 @@ namespace PerplexDashboards.Models.MemberDashboard.ActivityLog
             SearchResults = ApiMemberLogItem.Search(Filters, databaseContext);
 
             Actions = Enums.Values<MemberAuditAction>()
-                .ToDictionary(aa => (int)aa, aa => aa.ToString())
+                .ToDictionary(aa => (int)aa, aa => aa.GetDisplayName())
                 .ToList();
         }
     }

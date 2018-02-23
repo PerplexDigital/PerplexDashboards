@@ -9,10 +9,6 @@ using System.IO;
 using System.Xml.XPath;
 using PerplexDashboards.Models.UserDashboard;
 using PerplexDashboards.Models.MemberDashboard;
-using Umbraco.Web.Security.Providers;
-using System.Web.Security;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using PerplexDashboards.Models.MemberDashboard.AccessLog;
 
 namespace PerplexDashboards.Code
@@ -27,7 +23,7 @@ namespace PerplexDashboards.Code
             UserDashboardSettings.CreateIfNotExists();
 
             base.ApplicationStarting(umbApp, appCtx);
-        }        
+        }
 
         private delegate void HandleUserEvent(object o, EventArgs e);
 
@@ -77,7 +73,7 @@ namespace PerplexDashboards.Code
             // it is 0 instead (== default(int)).
             // Unfortunately, this means we cannot use this value, thus we will just ignore it when it's 0            
             int affectedUser = eventArgs.AffectedUser > 0 ? eventArgs.AffectedUser : -1;
-            var userLogItem = new UserLogItem(eventArgs.PerformingUser, affectedUser, eventArgs.Action, eventArgs.IpAddress, eventArgs.DateTimeUtc);
+            var userLogItem = new UserLogItem(eventArgs.PerformingUser, affectedUser, eventArgs.Username, eventArgs.Action, eventArgs.IpAddress, eventArgs.DateTimeUtc);
 
             userLogItem.Save(dbCtx);
         }      

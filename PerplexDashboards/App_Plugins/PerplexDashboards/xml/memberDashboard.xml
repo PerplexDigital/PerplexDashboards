@@ -17,7 +17,7 @@
     <control showOnce="true" addPanel="true" panelCaption="">/App_Plugins/PerplexDashboards/MemberDashboard/datatypes/AccessLog/perplex.member-dashboard.access-log.html</control>
   </tab>
 
-  <tab caption="Password Policy">
+  <tab caption="Umbraco Security Settings">
     <control showOnce="true" addPanel="true" panelCaption="">/App_Plugins/PerplexDashboards/MemberPasswordPolicy/perplex.member-password-policy.html</control>
   </tab>
 </section>

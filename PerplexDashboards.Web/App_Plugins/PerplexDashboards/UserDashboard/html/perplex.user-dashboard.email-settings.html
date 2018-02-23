@@ -12,11 +12,16 @@
                 get-value="editor.getValue"
                 set-value="editor.setValue">
             </perplex-render-property>
-    
-            <button type="button" class="btn btn-success" ng-click="vm.fn.save()" ng-disabled="vm.state.isSaving">
-                <span ng-if="vm.state.isSaving">Saving ...</span>
-                <span ng-if="!vm.state.isSaving">Save</span>
-            </button>
+            
+            <div style="padding: 1em 0 1em; text-align: right;">
+                <button type="button" class="btn btn-success" 
+                    ng-click="vm.fn.save()" 
+                    hotkey="ctrl+s"
+                    ng-disabled="vm.state.isSaving">                
+                    <span ng-if="vm.state.isSaving">Saving ...</span>
+                    <span ng-if="!vm.state.isSaving">Save</span>
+                </button>            
+            </div>
         </div>
     </div>
 </div>

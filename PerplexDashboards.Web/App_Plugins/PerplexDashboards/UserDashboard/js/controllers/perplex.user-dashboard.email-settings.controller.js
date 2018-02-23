@@ -26,7 +26,12 @@ angular.module("umbraco").controller("Perplex.UserDashboard.EmailSettings.Contro
                 {
                     alias: "Umbraco.TinyMCEv3",
                     label: "Locked Account - Email Body",
-                    description: "The body of the email which is sent after a user account has been locked",
+                    description:
+                        "The body of the email which is sent after a user account has been locked. The following tags can be used in the emails:<br>" +
+                        "[#username#]: The username of the locked user<br>" +
+                        "[#datetime#]: The date and time that the account was locked<br>" +
+                        "[#website#]: The name of the website",
+
                     getValue: get("LockedEmailBody"),
                     setValue: set("LockedEmailBody")
                 }

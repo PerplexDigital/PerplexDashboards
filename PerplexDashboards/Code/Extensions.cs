@@ -8,6 +8,8 @@ using System.Web;
 using Umbraco.Core;
 using Umbraco.Web.WebApi;
 using Umbraco.Core.Security;
+using Umbraco.Core.Auditing;
+using System.Text.RegularExpressions;
 
 namespace PerplexDashboards.Code
 {
@@ -23,5 +25,25 @@ namespace PerplexDashboards.Code
 
             return getValue(index);
         }      
+
+        public static string GetDisplayName(this AuditEvent evt)
+        {            
+            return Regex.Replace(evt.ToString(), @"([a-z])([A-Z])", m => $"{m.Groups[1]} {m.Groups[2]}");            
+        }
+
+        public static string GetDisplayName(this MemberAuditAction? action)
+        {
+            if(action == null)
+            {
+                return "";
+            }
+
+            return Regex.Replace(action.ToString(), @"([a-z])([A-Z])", m => $"{m.Groups[1]} {m.Groups[2]}");
+        }
+
+        public static string GetDisplayName(this MemberAuditAction action)
+        {
+            return ((MemberAuditAction?)action).GetDisplayName();
+        }
     }
 }

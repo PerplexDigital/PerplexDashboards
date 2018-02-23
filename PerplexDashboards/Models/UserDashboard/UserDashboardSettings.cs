@@ -140,6 +140,8 @@ namespace PerplexDashboards.Models.UserDashboard
 
             LockedEmailSubject = "An account was locked",
 
+            LockedEmailBody = "User account [#username#] was locked at [#datetime#] at [#website#].",
+
             LockedEmailRecipientAddress = "name@host.com"
         };
     }

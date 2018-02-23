@@ -24,6 +24,9 @@ namespace PerplexDashboards.Models.UserDashboard
         // PetaPoco does not support int? type...
         public int AffectedUserId { get; set; }
 
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string Username { get; set; }
+
         public int AuditEvent
         {
             get => (int)Event;
@@ -32,6 +35,8 @@ namespace PerplexDashboards.Models.UserDashboard
 
         [Ignore]
         public AuditEvent Event { get; set; }
+
+        [NullSetting(NullSetting = NullSettings.Null)]
         public string IpAddress { get; set; }
         public DateTime Timestamp { get; set; }
 
@@ -39,10 +44,11 @@ namespace PerplexDashboards.Models.UserDashboard
         {
         }
 
-        public UserLogItem(int userId, int affectedUserId, AuditEvent @event, string ip, DateTime timestamp)
+        public UserLogItem(int userId, int affectedUserId, string username, AuditEvent @event, string ip, DateTime timestamp)
         {
             UserId = userId;
             AffectedUserId = affectedUserId;
+            Username = username;
             Event = @event;
             IpAddress = ip;
             Timestamp = timestamp;
@@ -54,6 +60,7 @@ namespace PerplexDashboards.Models.UserDashboard
             Id = reader.GetValue(nameof(Id), reader.GetInt32);
             UserId = reader.GetValue(nameof(UserId), reader.GetInt32);
             AffectedUserId = reader.GetValue(nameof(AffectedUserId), reader.GetInt32);
+            Username = reader.GetValue(nameof(Username), reader.GetString);
             Event = reader.GetValue(nameof(Event), i => (AuditEvent) reader.GetInt32(i));
             IpAddress = reader.GetValue(nameof(IpAddress), reader.GetString);
             Timestamp = reader.GetValue(nameof(Timestamp), i => reader.GetDateTime(i).ToUniversalTime()); 
