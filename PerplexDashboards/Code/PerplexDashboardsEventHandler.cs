@@ -19,10 +19,16 @@ namespace PerplexDashboards.Code
         {
             ConfigureDashboards();
             RegisterUserEvents(appCtx.DatabaseContext);
-            CreateDatabaseTablesIfNeeded(appCtx.DatabaseContext, appCtx.ProfilingLogger.Logger);
+            CreateDatabaseTablesIfNeeded(appCtx.DatabaseContext, appCtx.ProfilingLogger.Logger);            
             UserDashboardSettings.CreateIfNotExists();
 
             base.ApplicationStarting(umbApp, appCtx);
+        }
+
+        protected override void ApplicationStarted(UmbracoApplicationBase umbApp, ApplicationContext appCtx)
+        {
+            RunDatabaseMigrations(appCtx);
+            base.ApplicationStarted(umbApp, appCtx);
         }
 
         private delegate void HandleUserEvent(object o, EventArgs e);
@@ -53,6 +59,11 @@ namespace PerplexDashboards.Code
             DatabaseHelper.CreateDatabaseTableIfNeeded<MemberAccessLogItem>(dbCtx, MemberAccessLogItem.TableName, logger);
         }
        
+        private void RunDatabaseMigrations(ApplicationContext appCtx)
+        {
+            UserLogItem.RunMigrations(appCtx);
+        }
+
         private void UsersMembershipProviderEventHandler(EventArgs e, DatabaseContext dbCtx)
         {
             if (e is IdentityAuditEventArgs eventArgs)

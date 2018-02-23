@@ -215,6 +215,7 @@
     <Compile Include="Code\Constants.cs" />
     <Compile Include="Code\EmailService.cs" />
     <Compile Include="Code\Enums.cs" />
+    <Compile Include="Code\Migrations\UserLogItemUsernameColumnMigration.cs" />
     <Compile Include="Code\PerplexDashboardsEventHandler.cs" />
     <Compile Include="Code\Extensions.cs" />
     <Compile Include="Models\MemberDashboard\AccessLog\ApiMemberAccessLogItem.cs" />

@@ -7,6 +7,11 @@ using Umbraco.Core.Persistence;
 using Umbraco.Core.Persistence.DatabaseAnnotations;
 using PerplexDashboards.Code;
 using System.Linq.Expressions;
+using Semver;
+using Umbraco.Core.Models;
+using System.Linq;
+using Umbraco.Core.Persistence.Migrations;
+using Umbraco.Core.Logging;
 
 namespace PerplexDashboards.Models.UserDashboard
 {
@@ -14,6 +19,8 @@ namespace PerplexDashboards.Models.UserDashboard
     [PrimaryKey(nameof(Id), autoIncrement = true)]
     public class UserLogItem
     {
+        private readonly static SemVersion TargetMigrationVersion = new SemVersion(1, 0, 1);
+
         public const string TableName = "perplexUmbracoUserLog";
 
         [PrimaryKeyColumn(AutoIncrement = true)]
@@ -116,6 +123,38 @@ namespace PerplexDashboards.Models.UserDashboard
             sql = sql.OrderByDescending<UserLogItem>(item => item.Timestamp, dbCtx.SqlSyntax);
 
             return dbCtx.Database.Fetch<UserLogItem>(sql);            
-        }       
+        }
+
+        public static void RunMigrations(ApplicationContext appCtx)
+        {
+            IEnumerable<IMigrationEntry> migrations = appCtx.Services.MigrationEntryService.GetAll(TableName);
+
+            SemVersion currentVersion = migrations
+                .OrderByDescending(x => x.Version)
+                .FirstOrDefault()
+                ?.Version ?? new SemVersion(0);
+
+            if (currentVersion == TargetMigrationVersion)
+            {
+                // We are up to date
+                return;
+            }                
+
+            var migrationsRunner = new MigrationRunner(
+               appCtx.Services.MigrationEntryService,
+               appCtx.ProfilingLogger.Logger,
+               currentVersion,
+               TargetMigrationVersion,
+               TableName);
+
+            try
+            {
+                migrationsRunner.Execute(appCtx.DatabaseContext.Database);
+            }
+            catch (Exception e)
+            {
+                LogHelper.Error<UserLogItem>($"Error running {TableName} migration", e);
+            }
+        }
     }
 }
