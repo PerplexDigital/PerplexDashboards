@@ -15,30 +15,24 @@ using PerplexDashboards.Code;
 namespace PerplexDashboards.Models.UserDashboard
 {
     public class ApiUserLogItem
-    {   
-        public int UserId { get; set; }
-        public string User { get; set; }
+    {
+        public int PerformingUserId { get; set; }
+        public string PerformingUser { get; set; }
         public int AffectedUserId { get; set; }
-        public string AffectedUser { get; set; }                
+        public string AffectedUser { get; set; }        
         public string Event { get; set; }
         public string IpAddress { get; set; }
         public string Timestamp { get; set; }
 
-        public ApiUserLogItem(UserLogItem item, IUserService userService = null)
+        public ApiUserLogItem(UserLogItem item, IUserService userService)
         {
-            IUserService us = userService ?? ApplicationContext.Current?.Services?.UserService;
-            if(us == null)
-            {
-                throw new NullReferenceException($"User service could not be obtained!");
-            }
-
-            UserId = item.UserId;
-            User = string.IsNullOrEmpty(item.Username) 
-                ? GetUsername(UserId, us)
+            PerformingUserId = item.PerformingUserId;
+            PerformingUser = string.IsNullOrEmpty(item.Username) 
+                ? GetUsername(PerformingUserId, userService)
                 : item.Username;
 
             AffectedUserId = item.AffectedUserId;
-            AffectedUser = GetUsername(AffectedUserId, us);
+            AffectedUser = GetUsername(AffectedUserId, userService);
             Event = item.Event.GetDisplayName();
             IpAddress = item.IpAddress;
 
@@ -48,7 +42,7 @@ namespace PerplexDashboards.Models.UserDashboard
 
         private string GetUsername(int userId, IUserService userService)
         {
-            const string noUser = "none";
+            const string noUser = "";
 
             if (userId == -1)
             {
@@ -58,10 +52,10 @@ namespace PerplexDashboards.Models.UserDashboard
             return userService.GetUserById(userId)?.Name ?? noUser;
         }
 
-        public static SearchResults<ApiUserLogItem> Search(UserFilters filters, DatabaseContext databaseContext = null)
+        public static SearchResults<ApiUserLogItem> Search(UserFilters filters, DatabaseContext databaseContext, IUserService userService)
         {          
             List<ApiUserLogItem> items = UserLogItem.GetAll(databaseContext, filters)              
-                .Select(i => new ApiUserLogItem(i))                             
+                .Select(i => new ApiUserLogItem(i, userService))                             
                 .ToList();
 
             IEnumerable<ApiUserLogItem> page = items.Skip((filters.Page - 1) * filters.PageSize).Take(filters.PageSize);

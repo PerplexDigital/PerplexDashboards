@@ -72,19 +72,23 @@ namespace PerplexDashboards.Code
 
                 if (eventArgs.Action == AuditEvent.AccountLocked)
                 {
-                    EmailService.SendLockedAccountEmail(eventArgs.PerformingUser);
+                    EmailService.SendLockedAccountEmail(eventArgs.AffectedUser);
                 }
             }
         }     
 
         private void LogEvent(IdentityAuditEventArgs eventArgs, DatabaseContext dbCtx)
-        {     
-            // AffectedUser appears to be 0 all the time, whether it actually affects user 0 or not,
-            // clearly something is wrong and when it's supposed to be null (or -1, since this is not a nullable int)
-            // it is 0 instead (== default(int)).
-            // Unfortunately, this means we cannot use this value, thus we will just ignore it when it's 0            
-            int affectedUser = eventArgs.AffectedUser > 0 ? eventArgs.AffectedUser : -1;
-            var userLogItem = new UserLogItem(eventArgs.PerformingUser, affectedUser, eventArgs.Username, eventArgs.Action, eventArgs.IpAddress, eventArgs.DateTimeUtc);
+        {
+            // LoginFailed always has the AffectedUser as 0 when their is no user for the login,
+            // see https://github.com/umbraco/Umbraco-CMS/blob/dev-v7/src/Umbraco.Core/Security/BackOfficeUserManager.cs#L609.
+            // This is a bug in Umbraco's implementation, so we will ignore the AffectedUser in that case.
+            int affectedUser = eventArgs.Action == AuditEvent.LoginFailed && eventArgs.Username != null && eventArgs.Comment != null
+                ? -1
+                : eventArgs.AffectedUser;
+
+            var userLogItem = new UserLogItem(
+                eventArgs.PerformingUser, affectedUser, eventArgs.Username, 
+                eventArgs.Action, eventArgs.IpAddress, eventArgs.DateTimeUtc);
 
             userLogItem.Save(dbCtx);
         }      

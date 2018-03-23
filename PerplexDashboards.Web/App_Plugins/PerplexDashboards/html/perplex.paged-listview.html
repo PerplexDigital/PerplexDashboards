@@ -19,8 +19,8 @@
                 ng-click="selectItem(item)" 
                 ng-class="{ 'c-table__row--selected' : isSelected(item), 'c-table__row--selectable': commands.length > 0}">
                 <td class="c-table__cell" ng-repeat="column in columns track by column.property">
-                    <a ng-if="column.onClick" href="" prevent-default ng-click="column.onClick(item)" ng-bind="item[column.property]"></a>
-                    <span ng-if="!column.onClick" ng-bind="item[column.property]"></span>
+                    <a ng-if="column.onClick && !column.skipOnClick(item)" href="" prevent-default ng-click="column.onClick(item)" ng-bind="item[column.property]"></a>
+                    <span ng-if="!column.onClick || column.skipOnClick(item)" ng-bind="item[column.property]"></span>
                 </td>                
             </tr>
         </tbody>

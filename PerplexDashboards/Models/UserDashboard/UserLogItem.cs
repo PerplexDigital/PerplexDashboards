@@ -19,16 +19,14 @@ namespace PerplexDashboards.Models.UserDashboard
     [PrimaryKey(nameof(Id), autoIncrement = true)]
     public class UserLogItem
     {
-        private readonly static SemVersion TargetMigrationVersion = new SemVersion(1, 0, 1);
+        private readonly static SemVersion TargetMigrationVersion = new SemVersion(1, 0, 2);
 
         public const string TableName = "perplexUmbracoUserLog";
 
         [PrimaryKeyColumn(AutoIncrement = true)]
         public int Id { get; set; }
 
-        // PetaPoco does not support int? type...
-        public int UserId { get; set; }
-        // PetaPoco does not support int? type...
+        public int PerformingUserId { get; set; }        
         public int AffectedUserId { get; set; }
 
         [NullSetting(NullSetting = NullSettings.Null)]
@@ -51,9 +49,9 @@ namespace PerplexDashboards.Models.UserDashboard
         {
         }
 
-        public UserLogItem(int userId, int affectedUserId, string username, AuditEvent @event, string ip, DateTime timestamp)
+        public UserLogItem(int performingUserId, int affectedUserId, string username, AuditEvent @event, string ip, DateTime timestamp)
         {
-            UserId = userId;
+            PerformingUserId = performingUserId;
             AffectedUserId = affectedUserId;
             Username = username;
             Event = @event;
@@ -65,7 +63,7 @@ namespace PerplexDashboards.Models.UserDashboard
         private UserLogItem(SqlDataReader reader)
         {
             Id = reader.GetValue(nameof(Id), reader.GetInt32);
-            UserId = reader.GetValue(nameof(UserId), reader.GetInt32);
+            PerformingUserId = reader.GetValue(nameof(PerformingUserId), reader.GetInt32);
             AffectedUserId = reader.GetValue(nameof(AffectedUserId), reader.GetInt32);
             Username = reader.GetValue(nameof(Username), reader.GetString);
             Event = reader.GetValue(nameof(Event), i => (AuditEvent) reader.GetInt32(i));
@@ -75,9 +73,7 @@ namespace PerplexDashboards.Models.UserDashboard
 
         public void Save(DatabaseContext databaseContext)
         {
-            DatabaseContext dbCtx = databaseContext ?? ApplicationContext.Current.DatabaseContext;
-
-            databaseContext.Database.Insert(this);            
+            databaseContext.Database.Save(this);            
         }
 
         public static IList<UserLogItem> GetAll(DatabaseContext databaseContext = null, UserFilters filters = null)
@@ -111,7 +107,7 @@ namespace PerplexDashboards.Models.UserDashboard
 
                 if(filters.UserId != null)
                 {
-                    addWhere(i => i.UserId == filters.UserId || i.AffectedUserId == filters.UserId);
+                    addWhere(i => i.PerformingUserId == filters.UserId || i.AffectedUserId == filters.UserId);
                 }
 
                 if (!string.IsNullOrEmpty(filters.IpAddress))

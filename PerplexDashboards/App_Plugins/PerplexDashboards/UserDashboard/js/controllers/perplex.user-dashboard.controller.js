@@ -37,11 +37,8 @@ angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
 
             columns: [
                 {
-                    name: "User",
-                    property: "User",
-                    onClick: function(item) {
-                        $location.url("/users/users/user/" + item.UserId + "?subview=users");
-                    }
+                    name: "Date & Time",
+                    property: "Timestamp"
                 },
 
                 {
@@ -50,30 +47,35 @@ angular.module("umbraco").controller("Perplex.UserDashboard.Controller", [
                 },
 
                 {
-                    name: "Date & Time",
-                    property: "Timestamp"
-                },
+                    name: "Affected User",
+                    property: "AffectedUser",
+                    skipOnClick: function (item) {
+                        return item.AffectedUserId === -1;
+                    },
+                    onClick: function (item) {
+                        $location.url("/users/users/user/" + item.AffectedUserId + "?subview=users");
+                    }
+                },   
 
+                {
+                    name: "Performing User",
+                    property: "PerformingUser",
+                    skipOnClick: function (item) {
+                        return item.PerformingUserId === -1;
+                    },
+                    onClick: function (item) {
+                        $location.url("/users/users/user/" + item.PerformingUserId + "?subview=users");
+                    }
+                },
+              
                 {
                     name: "IP Address",
                     property: "IpAddress"
-                },
-
-                {
-                    name: "Affected User",
-                    property: "AffectedUser",
-                    onClick: function(item) {
-                        if (item.AffectedUserId == -1) {
-                            return;
-                        }
-
-                        $location.url("/users/users/user/" + item.AffectedUserId + "?subview=users");
-                    }
-                }
+                }               
             ],
 
             // Debounce timeout
-            timeout: 333,
+            timeout: 444,
 
             // Result of $timeout
             timer: null,

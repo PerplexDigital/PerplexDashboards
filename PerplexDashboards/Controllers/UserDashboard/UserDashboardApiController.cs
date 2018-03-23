@@ -38,7 +38,7 @@ namespace PerplexDashboards.Controllers.UserDashboard
         [HttpPost]
         public SearchResults<ApiUserLogItem> Search(UserFilters filters)
         {          
-            return ApiUserLogItem.Search(filters, DbContext);
+            return ApiUserLogItem.Search(filters, DbContext, Services.UserService);
         }
 
         [HttpGet]

@@ -2,15 +2,15 @@
   <areas>
     <area>member</area>
   </areas>
+  <tab caption="Activity Log">
+    <control showOnce="true" addPanel="true" panelCaption="">/App_Plugins/PerplexDashboards/MemberDashboard/html/perplex.member-dashboard.activity-log.html</control>
+  </tab>
+  
   <tab caption="Locked Accounts">
     <control showOnce="false" addPanel="true">/App_Plugins/PerplexDashboards/MemberDashboard/html/LockedMemberAccounts.html</control>
   </tab>
   <tab caption="Unapproved Accounts">
     <control showOnce="false" addPanel="true">/App_Plugins/PerplexDashboards/MemberDashboard/html/UnapprovedMemberAccounts.html</control>
-  </tab>
-
-  <tab caption="Activity Log">
-    <control showOnce="true" addPanel="true" panelCaption="">/App_Plugins/PerplexDashboards/MemberDashboard/html/perplex.member-dashboard.activity-log.html</control>
   </tab>
 
   <tab caption="Access Log">

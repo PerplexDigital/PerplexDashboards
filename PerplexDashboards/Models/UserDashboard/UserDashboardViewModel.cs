@@ -15,7 +15,7 @@ namespace PerplexDashboards.Models.UserDashboard
         public IEnumerable<ApiUser> Users { get; }
         public IList<KeyValuePair<int, string>> Events { get; }
 
-        public UserDashboardViewModel(IUserService userService, DatabaseContext databaseContext = null)
+        public UserDashboardViewModel(IUserService userService, DatabaseContext databaseContext)
         {
             Filters = new UserFilters
             {
@@ -25,7 +25,7 @@ namespace PerplexDashboards.Models.UserDashboard
                 PageSize = 10
             };
 
-            SearchResults = ApiUserLogItem.Search(Filters, databaseContext);
+            SearchResults = ApiUserLogItem.Search(Filters, databaseContext, userService);
 
             Users = userService
                 .GetAll(0, int.MaxValue, out int _)
