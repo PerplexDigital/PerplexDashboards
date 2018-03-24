@@ -53,7 +53,7 @@ namespace PerplexDashboards.Controllers.MemberDashboard
             };
 
             List<LockedMemberAccount> allLockedMembers = orderBy(
-                LockedMemberAccount.GetAll(ApplicationContext.DatabaseContext)
+                LockedMemberAccount.GetAll(Services.MemberService)
                 .Where(member =>
                     string.IsNullOrEmpty(request.Filter) ||
                     member.Name.ToLower().Contains(filterNormalized) ||
@@ -66,7 +66,7 @@ namespace PerplexDashboards.Controllers.MemberDashboard
 
             pagedResult.Items = allLockedMembers.Skip(toSkip).Take(request.PageSize).Select(a => new LockedMembersListViewResponse
             {
-                id = a.MemberId,
+                id = a.Member.Id,
                 icon = a.Icon,
                 name = a.Name,
                 published = true,
@@ -133,7 +133,7 @@ namespace PerplexDashboards.Controllers.MemberDashboard
             };
 
             List<UnapprovedMemberAccount> allLockedMembers = orderBy(
-                UnapprovedMemberAccount.GetAll(ApplicationContext.DatabaseContext)
+                UnapprovedMemberAccount.GetAll(Services.MemberService)
                 .Where(member =>
                     string.IsNullOrEmpty(request.Filter) ||
                     member.Name.ToLower().Contains(filterNormalized) ||
@@ -146,7 +146,7 @@ namespace PerplexDashboards.Controllers.MemberDashboard
 
             pagedResult.Items = allLockedMembers.Skip(toSkip).Take(request.PageSize).Select(a => new UnapprovedMembersListViewResponse
             {
-                id = a.MemberId,
+                id = a.Member.Id,
                 icon = a.Icon,
                 name = a.Name,
                 published = true,

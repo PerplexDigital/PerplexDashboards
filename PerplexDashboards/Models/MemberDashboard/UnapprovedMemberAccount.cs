@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Umbraco.Core;
+using Umbraco.Core.Models;
 using Umbraco.Core.Persistence;
+using Umbraco.Core.Services;
 
 namespace PerplexDashboards.Models.MemberDashboard
 {
@@ -9,13 +11,13 @@ namespace PerplexDashboards.Models.MemberDashboard
     {
         public DateTime CreateDate => Member.CreateDate;
 
-        public static IEnumerable<UnapprovedMemberAccount> GetAll(DatabaseContext dbCtx)
+        public UnapprovedMemberAccount(IMember member) : base(member)
         {
-            return GetAll(dbCtx, new Sql()
-                .Select("d.contentNodeId as MemberId")
-                .From("cmsPropertyData d", "cmsPropertyType p")
-                .Where("d.propertytypeid = p.id AND p.UniqueId = '0000001E-0000-0000-0000-000000000000' AND d.dataint = 0")
-                .SQL);
+        }
+
+        public static IEnumerable<UnapprovedMemberAccount> GetAll(IMemberService memberService)
+        {
+            return GetAll(memberService, im => !im.IsApproved, im => new UnapprovedMemberAccount(im));
         }
     }
 }
