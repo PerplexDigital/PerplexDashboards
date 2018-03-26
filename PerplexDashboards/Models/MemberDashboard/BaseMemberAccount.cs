@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Umbraco.Core;
@@ -9,20 +10,23 @@ namespace PerplexDashboards.Models.MemberDashboard
 {
     public abstract class BaseMemberAccount<T> where T : BaseMemberAccount<T>
     {
-        public int MemberId { get; set; }
-
-        private IMember _member;
-        public IMember Member => _member ?? (_member = memberService.GetById(MemberId));
+        public IMember Member { get; }
 
         public string Name => Member.Name;
         public string Email => Member.Email;
         public string Icon => Member.ContentType.Icon;
-
-        protected static IMemberService memberService = ApplicationContext.Current.Services.MemberService;
-        protected static IEnumerable<T> GetAll(DatabaseContext db, string query)
+       
+        public BaseMemberAccount(IMember member)
         {
-            if (memberService == null) return Enumerable.Empty<T>();
-            return db.Database.Query<T>(query);
+            Member = member;
+        }
+
+        protected static IList<T> GetAll(IMemberService memberService, Func<IMember, bool> filterFn, Func<IMember, T> mapFn)
+        {
+            return memberService.GetAll(0, int.MaxValue, out int _)
+                .Where(filterFn)
+                .Select(mapFn)
+                .ToList();
         }
     }
 }
