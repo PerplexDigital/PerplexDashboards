@@ -126,15 +126,22 @@ namespace PerplexDashboards.Models.UserDashboard
             IEnumerable<IMigrationEntry> migrations = appCtx.Services.MigrationEntryService.GetAll(TableName);
 
             SemVersion currentVersion = migrations
-                .OrderByDescending(x => x.Version)
+                .OrderByDescending(x => x.CreateDate)
                 .FirstOrDefault()
-                ?.Version ?? new SemVersion(0);
+                ?.Version;
+
+            if(currentVersion == null)
+            {
+                // We are up to date, as we installed without a previous version being present
+                appCtx.Services.MigrationEntryService.CreateEntry(TableName, TargetMigrationVersion);
+                return;
+            }
 
             if (currentVersion == TargetMigrationVersion)
             {
-                // We are up to date
+                // We were up to date already
                 return;
-            }                
+            }                            
 
             var migrationsRunner = new MigrationRunner(
                appCtx.Services.MigrationEntryService,
@@ -145,7 +152,7 @@ namespace PerplexDashboards.Models.UserDashboard
 
             try
             {
-                migrationsRunner.Execute(appCtx.DatabaseContext.Database);
+                migrationsRunner.Execute(appCtx.DatabaseContext.Database, currentVersion < TargetMigrationVersion);
             }
             catch (Exception e)
             {

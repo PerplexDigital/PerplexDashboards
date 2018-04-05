@@ -68,7 +68,13 @@ namespace PerplexDashboards.Code
         {
             if (e is IdentityAuditEventArgs eventArgs)
             {
-                LogEvent(eventArgs, dbCtx);
+                try
+                {
+                    LogEvent(eventArgs, dbCtx);
+                } catch(Exception ex)
+                {
+                    LogHelper.Error<PerplexDashboardsEventHandler>("Error logging event", ex);
+                }                
 
                 if (eventArgs.Action == AuditEvent.AccountLocked)
                 {
